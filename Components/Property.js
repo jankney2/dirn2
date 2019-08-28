@@ -16,7 +16,7 @@ trackingToggler=()=>{
 
     Alert.alert(this.state.tracking)
     axios.put(`https://dropin.business/properties/${this.props.deleteId}`, {
-    userId:14, 
+    userId:this.props.owningUser, 
         trackingStatus:trueFalse
     })
     .then((res)=>{

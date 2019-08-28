@@ -8,16 +8,17 @@ import {
   Alert
 } from "react-native";
 import axios from "axios";
+import {connect} from 'react-redux'
 import Property from "./Property";
 
-export default class Properties extends Component {
+class Properties extends Component {
   state = {
     userProperties: []
   };
 
   componentDidMount() {
     axios
-      .get("https://dropin.business/api/userProperties/14")
+      .get(`https://dropin.business/api/userProperties/${this.props.activeUser.user_id}`)
       .then(res => {
         this.setState({
           userProperties: res.data
@@ -43,6 +44,7 @@ export default class Properties extends Component {
                       userProperties:obj
                     })
                   }}
+                  owningUser={this.props.activeUser.user_id}
                   updateUserProperties={this.updateUserProperties}
                   address={`${item.street}, ${item.city}`}
                   tracking={item.is_tracked}
@@ -66,3 +68,8 @@ const styles = StyleSheet.create({
     alignItems: "center"
   }
 });
+
+const mapStateToProps=state=>{
+  return {activeUser:state.user}
+}
+export default connect(mapStateToProps)(Properties)

@@ -31,10 +31,10 @@ import {connect} from 'react-redux'
                   longitude: position.coords.longitude
                 });
 
-              axios.post(`https://dropin.business/api/test/${this.props.activeUser.user_id}`, {
-                userLat:this.state.latitude, 
-                userLong:this.state.longitude
-              })
+              // axios.post(`https://dropin.business/api/test/${this.props.activeUser.user_id}`, {
+              //   userLat:this.state.latitude, 
+              //   userLong:this.state.longitude
+              // })
               },
               err => {
                 console.log(err);
