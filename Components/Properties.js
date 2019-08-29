@@ -11,6 +11,7 @@ import axios from "axios";
 import {connect} from 'react-redux'
 import Property from "./Property";
 
+
 class Properties extends Component {
   state = {
     userProperties: []
@@ -27,7 +28,8 @@ class Properties extends Component {
       .catch(err => Alert.alert(err));
   }
 
-  updateUserProperties = () => {};
+
+
   render() {
     return (
       <ScrollView>
@@ -39,9 +41,9 @@ class Properties extends Component {
             renderItem={({ item }) => {
               return (
                 <Property
-                  dataUpdater={(obj) => {
+                  updatePropertyList={(newData)=>{
                     this.setState({
-                      userProperties:obj
+                      userProperties:newData
                     })
                   }}
                   owningUser={this.props.activeUser.user_id}
@@ -51,7 +53,7 @@ class Properties extends Component {
                   deleteId={item.property_id}
                   style={{ textAlign: "center" }}
                 />
-              );
+               );
             }}
             keyExtractor={item => item.property_id.toString()}
           />

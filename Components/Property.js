@@ -9,20 +9,12 @@ export default class Property extends Component {
      }
 
 trackingToggler=()=>{
-    this.setState({
-        tracking:!this.state.tracking
-    })
-    let trueFalse=this.state.tracking
+ axios.put(`https://dropin.business/properties/changeMobile/${this.props.deleteId}`, {userId:this.props.owningUser}).then(res=>{
+     this.props.updatePropertyList(res.data)
+ }).catch(err=>{
+     console.log(err, 'error with toggle')
+ })
 
-    Alert.alert(this.state.tracking)
-    axios.put(`https://dropin.business/properties/${this.props.deleteId}`, {
-    userId:this.props.owningUser, 
-        trackingStatus:trueFalse
-    })
-    .then((res)=>{
-        
-      this.props.dataUpdater(res.data)  
-    }).catch(err=>Alert.alert(err))
 }
 
 
@@ -38,7 +30,9 @@ trackingToggler=()=>{
                 
                 <Button title={this.state.tracking?'tracking':'untracked'} 
                 buttonStyle={[this.state.tracking?styles.tracking: styles.untracked, styles.button]}
-                onPress={this.trackingToggler}
+                onPress={()=>{
+//put request to toggle, set response 
+                }}
                 />
                 
             </View>
