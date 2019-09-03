@@ -34,6 +34,19 @@ trackingToggler=()=>{
 //put request to toggle, set response 
                 }}
                 />
+  
+                <Button title={'send to crm'} 
+                buttonStyle={styles.crmToggle}
+                onPress={()=>{
+
+axios.post(`https://dropin.business/properties/addToCrmList/${this.props.deleteId}`, {
+    userId:this.props.owningUser, 
+    currentStatus:this.props.crmStatus
+}).then(res=>{
+    this.props.updatePropertyList(res.data)
+})
+                }}
+                />
                 
             </View>
         );
@@ -54,5 +67,8 @@ const styles=StyleSheet.create({
     }, 
     untracked:{
         backgroundColor:'red'
+    }, 
+    crmToggle: {
+        backgroundColor:'blue'
     }
 })

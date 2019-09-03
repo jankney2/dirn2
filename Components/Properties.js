@@ -5,16 +5,22 @@ import {
   StyleSheet,
   ScrollView,
   FlatList,
-  Alert
+  Alert, 
+  TextInput
 } from "react-native";
 import axios from "axios";
 import {connect} from 'react-redux'
 import Property from "./Property";
+import { SafeAreaView } from "react-navigation";
+import {SearchBar} from 'react-native-elements'
+
 
 
 class Properties extends Component {
   state = {
-    userProperties: []
+    userProperties: [],
+    inputVal:''
+
   };
 
   componentDidMount() {
@@ -28,10 +34,29 @@ class Properties extends Component {
       .catch(err => Alert.alert(err));
   }
 
+  inputChange=text=>{
+    
+    let searchFilter= this.state.userProperties.filter(el=>{
+      
+      return el.street.toLowerCase().includes(text.toLowerCase()) || el.city.toLowerCase().includes(text.toLowerCase())
+    })
+    this.setState({
+      [text.name]:text, 
 
+    })
 
+  }
+  
+  
   render() {
+    
+    
     return (
+
+      <SafeAreaView>
+
+      <TextInput name= 'inputVal' onChangeText={this.inputChange} />
+
       <ScrollView>
         <View style={styles.contain}>
           <Text>Properties</Text>
@@ -50,6 +75,7 @@ class Properties extends Component {
                   updateUserProperties={this.updateUserProperties}
                   address={`${item.street}, ${item.city}`}
                   tracking={item.is_tracked}
+                  crmStatus={item.send_to_crm}
                   deleteId={item.property_id}
                   style={{ textAlign: "center" }}
                 />
@@ -59,6 +85,8 @@ class Properties extends Component {
           />
         </View>
       </ScrollView>
+
+      </SafeAreaView>
     );
   }
 }
