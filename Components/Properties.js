@@ -44,7 +44,7 @@ class Properties extends Component {
 
     this.setState({
       [text.name]:text, 
-      // userProperties:searchFilter
+      userProperties:searchFilter
     })
 
   }
@@ -75,6 +75,7 @@ class Properties extends Component {
                       userProperties:newData
                     })
                   }}
+                  searchVal={this.state.inputVal}
                   owningUser={this.props.activeUser.user_id}
                   updateUserProperties={this.updateUserProperties}
                   address={`${item.street}, ${item.city}`}

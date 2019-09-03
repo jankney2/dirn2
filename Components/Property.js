@@ -23,7 +23,7 @@ trackingToggler=()=>{
 
 
 
-    render() {
+    render() {        
         return (
             <View style={styles.contain}>
                 <Text>{this.props.address}</Text>
@@ -50,6 +50,7 @@ axios.post(`https://dropin.business/properties/addToCrmList/${this.props.deleteI
                 
             </View>
         );
+    
     }
 }
 
