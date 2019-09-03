@@ -16,6 +16,7 @@ import {SearchBar} from 'react-native-elements'
 
 
 
+
 class Properties extends Component {
   state = {
     userProperties: [],
@@ -40,9 +41,10 @@ class Properties extends Component {
       
       return el.street.toLowerCase().includes(text.toLowerCase()) || el.city.toLowerCase().includes(text.toLowerCase())
     })
+
     this.setState({
       [text.name]:text, 
-
+      // userProperties:searchFilter
     })
 
   }
@@ -64,8 +66,10 @@ class Properties extends Component {
           <FlatList
             data={this.state.userProperties}
             renderItem={({ item }) => {
-              return (
-                <Property
+
+
+                return (
+                  <Property
                   updatePropertyList={(newData)=>{
                     this.setState({
                       userProperties:newData
@@ -78,9 +82,10 @@ class Properties extends Component {
                   crmStatus={item.send_to_crm}
                   deleteId={item.property_id}
                   style={{ textAlign: "center" }}
-                />
-               );
-            }}
+                  />
+                  );
+            
+                }}
             keyExtractor={item => item.property_id.toString()}
           />
         </View>
