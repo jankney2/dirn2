@@ -12,17 +12,25 @@ import axios from "axios";
 import {connect} from 'react-redux'
 import Property from "./Property";
 import { SafeAreaView } from "react-navigation";
-import {SearchBar} from 'react-native-elements'
+
+
+
 
 
 
 
 class Properties extends Component {
-  state = {
+constructor(){
+  super()
+  this.state = {
     userProperties: [],
-    inputVal:''
-
+    inputVal:'',
+  
   };
+  this.arrayHolder=[]
+}
+
+
 
   componentDidMount() {
     axios
@@ -31,22 +39,26 @@ class Properties extends Component {
         this.setState({
           userProperties: res.data
         });
+        this.arrayHolder=res.data
       })
       .catch(err => Alert.alert(err));
   }
 
   inputChange=text=>{
-    
-    let searchFilter= this.state.userProperties.filter(el=>{
-      
-      return el.street.toLowerCase().includes(text.toLowerCase()) || el.city.toLowerCase().includes(text.toLowerCase())
+    // this.setState({
+    //   [text.name]:text, 
+    // })
+
+    const newData=this.arrayHolder.filter(el=>{
+      return el.street.toLowerCase().indexOf(text.toLowerCase())>-1 || el.city.toLowerCase().indexOf(text.toLowerCase())>-1
+
     })
 
     this.setState({
-      [text.name]:text, 
-      userProperties:searchFilter
+      userProperties:newData
     })
-
+    
+    
   }
   
   
