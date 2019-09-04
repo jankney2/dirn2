@@ -69,6 +69,7 @@ constructor(){
 
       <SafeAreaView>
 
+
       <TextInput name= 'inputVal' onChangeText={this.inputChange} />
 
       <ScrollView>
