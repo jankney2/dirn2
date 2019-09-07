@@ -96,6 +96,7 @@ inputContainerStyle={{backgroundColor:'white'}}
 
                 return (
                   <Property
+                  
                   updatePropertyList={(newData)=>{
                     this.setState({
                       userProperties:newData

@@ -5,3 +5,11 @@ export const setUser=(response)=>{
     }
 
 }
+
+export const updateDisplayProperty=(response)=>{
+    return {
+        type:'UPDATE_DISPLAY_PROPERTY', 
+        payload:response
+    }
+
+}

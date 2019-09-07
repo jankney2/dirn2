@@ -1,8 +1,10 @@
 
 
 
+
 const initialState={
-    user:{}
+    user:{},
+    displayProperty: {}
 }
 
 
@@ -12,6 +14,10 @@ export const mobileReducer=(state=initialState, action)=>{
 
         return {...state, user:action.payload}
         
+        case 'UPDATE_DISPLAY_PROPERTY':
+
+        return {...state, displayProperty:action.payload}
+
         
         default:
             return state

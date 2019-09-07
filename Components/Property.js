@@ -1,9 +1,16 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Alert} from 'react-native';
-import {Button} from 'react-native-elements';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {updateDisplayProperty} from '../redux/actionsTypes'
+import {connect} from 'react-redux'
 import axios from 'axios';
+import {createStackNavigator} from 'react-navigation'
 
-export default class Property extends Component {
+
+
+
+
+
+class Property extends Component {
   state = {
     tracking: this.props.tracking,
   };
@@ -24,10 +31,28 @@ export default class Property extends Component {
 
   render() {
     return (
-      <View style={styles.contain}>
-        <Text>{this.props.address}</Text>
+      <TouchableOpacity onPress={()=>{
+this.props.updateDisplayProperty({
+  address:this.props.address, 
+  ownerName:'jacob', 
+ distance:'distance'
+})
 
-        <Button
+      }}>
+      <View style={styles.contain}
+            >
+        <Text style={styles.textHeader}>{this.props.address}</Text>
+        <Text style={styles.smallText}>Owner Name</Text>
+        <Text style={styles.smallText}>Distance Away</Text>
+        
+        
+        
+        
+        
+        
+        
+        
+        {/* <Button
           title={this.state.tracking ? 'tracking' : 'untracked'}
           buttonStyle={[
             this.state.tracking ? styles.tracking : styles.untracked,
@@ -36,9 +61,9 @@ export default class Property extends Component {
           onPress={() => {
             //put request to toggle, set response
           }}
-        />
+        /> */}
 
-        <Button
+        {/* <Button
           title={'send to crm'}
           buttonStyle={styles.crmToggle}
           onPress={() => {
@@ -54,22 +79,50 @@ export default class Property extends Component {
                 this.props.updatePropertyList(res.data);
               });
           }}
-        />
-
-
-        
+        /> */}
       </View>
+      </TouchableOpacity>
     );
   }
 }
+
+
+// const Navigator= createStackNavigator({
+//   properties:{
+//     screen:Property
+
+//   }, 
+//   individual:{
+//     screen: IndividualProperty
+//   }
+// })
+
+const mapDispatchToProps = {
+  updateDisplayProperty,
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Property);
+
 
 const styles = StyleSheet.create({
   contain: {
     flex: 1,
     justifyContent: 'space-around',
-    alignItems: 'center',
-    flexDirection: 'row',
     padding: 20,
+    borderBottomColor:'black', 
+    borderBottomWidth:1, 
+    width:'95%', 
+    marginLeft:'2.5%'
+  },
+  textHeader: {
+    fontSize: 24,
+    fontWeight: '600',
+  },
+  smallText: {
+    padding:5
   },
 
   tracking: {
