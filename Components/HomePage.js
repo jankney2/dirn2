@@ -14,6 +14,8 @@ class HomePage extends Component {
     user: {},
     counter: 0,
   };
+  
+  
 
   render() {
     return (
