@@ -5,7 +5,7 @@ import Properties from './Properties'
 import {Button} from 'react-native-elements';
 import {createBottomTabNavigator, createAppContainer} from 'react-navigation'
 import {connect} from 'react-redux';
-
+import Settings from './Settings'
 
 class HomePage extends Component {
   state = {
@@ -60,21 +60,21 @@ const smallNav= createBottomTabNavigator({
   homePage:{
     screen:HomePage, 
     navigationOptions: {
-      tabBarLabel:'homepage',
+      tabBarLabel:'Home',
 
     }
   }, 
   settings:{
-    screen:HomePage, 
+    screen:Settings, 
     navigationOptions: {
-      tabBarLabel:'settings',
+      tabBarLabel:'Settings',
 
     }
   }, 
   properties:{
     screen:Properties, 
     navigationOptions: {
-      tabBarLabel:'properties',
+      tabBarLabel:'Properties',
 
     }
   }, 

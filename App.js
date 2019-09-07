@@ -27,7 +27,8 @@ defaultNavigationOptions: {
         title: 'DropIn', 
         headerTintColor:'white', 
         headerStyle: {
-          backgroundColor:'blue'
+          backgroundColor:'blue',
+          fontSize: 36, 
         }, 
         headerLeft:null, 
         gesturesEnabled:false

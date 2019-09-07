@@ -21,13 +21,7 @@ class Login extends Component {
     passVal: '',
   };
 
-static navigationOptions= {
-  title: 'DropIn', 
-  headerTintColor:'white', 
-  headerStyle: {
-    backgroundColor:'blue'
-  }
-}
+
 
   changeHandler = text => {
     this.setState({
