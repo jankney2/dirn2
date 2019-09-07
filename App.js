@@ -28,7 +28,7 @@ defaultNavigationOptions: {
         headerTintColor:'white', 
         headerStyle: {
           backgroundColor:'blue',
-          fontSize: 36, 
+            fontWeight:'bold'
         }, 
         headerLeft:null, 
         gesturesEnabled:false

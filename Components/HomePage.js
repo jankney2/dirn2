@@ -57,17 +57,17 @@ class HomePage extends Component {
 
 
 const smallNav= createBottomTabNavigator({
-  homePage:{
-    screen:HomePage, 
-    navigationOptions: {
-      tabBarLabel:'Home',
-
-    }
-  }, 
   settings:{
     screen:Settings, 
     navigationOptions: {
       tabBarLabel:'Settings',
+
+    }
+  }, 
+  homePage:{
+    screen:HomePage, 
+    navigationOptions: {
+      tabBarLabel:'Home',
 
     }
   }, 
@@ -83,9 +83,9 @@ const smallNav= createBottomTabNavigator({
   initialRouteName:'homePage', 
   tabBarOptions:{
     activeTintColor:'red', 
-    inactiveTintColor:'grey', 
+    inactiveTintColor:'white', 
     style:{
-      backgroundColor:'white', 
+      backgroundColor:'blue', 
       shadowColor:'black', 
       shadowOffset:{width:5, height:3},
       borderTopWidth:0,
@@ -104,8 +104,6 @@ const styles = StyleSheet.create({
   hello: {
     // height:,
     // width:350,
-    borderWidth: 4,
-    borderColor: 'red',
     padding: 10,
     flex: 1,
     justifyContent: 'space-around',

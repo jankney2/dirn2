@@ -13,7 +13,7 @@ import {connect} from 'react-redux'
 import Property from "./Property";
 import { SafeAreaView } from "react-navigation";
 
-
+import {SearchBar} from 'react-native-elements'
 
 
 
@@ -68,9 +68,22 @@ constructor(){
     return (
 
       <SafeAreaView>
+{/* 
+<SearchBar name= 'inputVal'
 
+  // value={this.state.inputVal}
+   lightTheme 
+   inputStyle={{
+     color:'red'
+   }}
+   placeholder='Owner Name/Address'
+   containerStyle={{
+  backgroundColor:'white'
+}} 
+inputContainerStyle={{backgroundColor:'white'}}
 
-      <TextInput name= 'inputVal' onChangeText={this.inputChange} />
+/> */}
+      <TextInput  placeholder="Search for owner Name/Address" style={styles.inputStyles}  onChangeText={this.inputChange} />
 
       <ScrollView>
         <View style={styles.contain}>
@@ -115,6 +128,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center"
+  }, 
+  inputStyles:{
+    padding:20
   }
 });
 
