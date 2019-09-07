@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-
+import {connect} from 'react-redux'
 import {View, Text} from 'react-native'
-export default class IndividualProperty extends Component {
+ class IndividualProperty extends Component {
     state = {  }
+
+    componentDidMount() {
+        console.log(this.props.property)
+    }
     render() {
         return (
             <View>

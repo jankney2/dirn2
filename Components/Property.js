@@ -3,9 +3,9 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {updateDisplayProperty} from '../redux/actionsTypes'
 import {connect} from 'react-redux'
 import axios from 'axios';
-import {createStackNavigator} from 'react-navigation'
+import {createStackNavigator, createAppContainer} from 'react-navigation'
 
-
+import IndividualProperty from './IndividualProperty'
 
 
 
@@ -87,15 +87,7 @@ this.props.updateDisplayProperty({
 }
 
 
-// const Navigator= createStackNavigator({
-//   properties:{
-//     screen:Property
 
-//   }, 
-//   individual:{
-//     screen: IndividualProperty
-//   }
-// })
 
 const mapDispatchToProps = {
   updateDisplayProperty,

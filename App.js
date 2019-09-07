@@ -37,6 +37,10 @@ defaultNavigationOptions: {
 });
 
 
+  
+
+
+
 const Navigator= createAppContainer(Nav)
 
 

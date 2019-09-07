@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
+import {createStackNavigator} from 'react-navigation'
+import IndividualProperty from './IndividualProperty'
 
-import Properties from './Properties'
+import Property from './Property'
 import {Button} from 'react-native-elements';
 import {createBottomTabNavigator, createAppContainer} from 'react-navigation'
 import {connect} from 'react-redux';
@@ -72,7 +74,16 @@ const smallNav= createBottomTabNavigator({
     }
   }, 
   properties:{
-    screen:Properties, 
+    screen:createStackNavigator({
+      properties:{
+        screen:Property
+    
+      }, 
+      individual:{
+        screen: IndividualProperty
+      }
+    })
+  , 
     navigationOptions: {
       tabBarLabel:'Properties',
 
