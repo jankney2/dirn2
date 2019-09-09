@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {View, Text, StyleSheet, Button} from 'react-native';
+import {View, Text, StyleSheet, Button, KeyboardAvoidingView} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
+import Axios from 'axios';
 class IndividualProperty extends Component {
   state = {
     viewInformation: true,
     newNoteInput:'', 
-    noteLength:newNoteInput.length
   };
 
   componentDidMount() {
@@ -72,7 +72,7 @@ class IndividualProperty extends Component {
       );
     } else {
       return (
-        <View>
+        <KeyboardAvoidingView behavior='padding'>
           <View style={styles.header}>
             <Button
               title="information"
@@ -96,18 +96,34 @@ class IndividualProperty extends Component {
                   <Text>Owner Name</Text>
               <Text>User Notes from Redux</Text>
 
-                <TextInput placeholder="Add note..."
+                <TextInput 
+                multiline={true}
+                placeholder="Add note..."
+                style={{width:'80%', 
+                        marginLeft:'10%', 
+                        borderColor:'black', 
+                        borderWidth:1, 
+                        height:'70%'
+                }}
                 onChangeText={(text)=>{
                     this.setState({
                         newNoteInput:text
                     })
                 }} />              
+                <Text>Characters Left:{this.state.newNoteInput.length}/1000 {this.props.property.property_id}</Text>
 
+                <Button title='save note'
+                onPress={()=>{
+                    Axios.put(`https://dropin.business/properties/addNote/${this.props.property.property_id}`, {
+
+                    })
+                }}
+                />
               </View>
 
 
 
-        </View>
+        </KeyboardAvoidingView>
       );
     }
   }
