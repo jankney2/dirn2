@@ -32,8 +32,11 @@ class Property extends Component {
         onPress={() => {
           this.props.updateDisplayProperty({
             address: this.props.address,
-            ownerName: 'jacob',
+            ownerName: this.props.owner,
             distance: 'distance',
+            price:this.props.price, 
+            bedrooms:this.props.bedrooms, 
+            bathrooms:this.props.bathrooms
           });
           this.props.viewIndividualToggler()
         }}>

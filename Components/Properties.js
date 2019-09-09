@@ -103,6 +103,10 @@ class Properties extends Component {
                           userProperties: newData,
                         });
                       }}
+                      price={item.price}
+                      bedrooms={item.bedrooms}
+                      bathrooms={item.bathrooms}
+                      owner={item.seller}
                       searchVal={this.state.inputVal}
                       owningUser={this.props.activeUser.user_id}
                       updateUserProperties={this.updateUserProperties}
@@ -122,11 +126,11 @@ class Properties extends Component {
       );
     } else {
       return (
-        <View>
+
           <IndividualProperty 
           viewIndividualToggler={()=>{this.viewIndividualToggler()}}
           />
-        </View>
+
       );
     }
   }
