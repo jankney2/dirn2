@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 // import {Button} from 'react-native-elements'
 import {View, Text, StyleSheet, Button} from 'react-native';
 import {connect} from 'react-redux';
+import Axios from 'axios';
 export default class Settings extends Component {
   state = {};
   render() {
@@ -38,7 +39,11 @@ export default class Settings extends Component {
         </View>
 
         <Button 
-
+        onPress={()=>{
+          Axios.get('http://dropin.business/auth/logout').then(res=>{
+            this.props.navigation.navigate('login')
+          })
+        }}
         title="Logout" />
       </View>
     );
