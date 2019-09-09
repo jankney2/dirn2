@@ -1,25 +1,48 @@
 import React, { Component } from 'react';
 
-import {View, Button, Text, StyleSheet} from 'react-native'
+import {View, Button, Text, StyleSheet, TextInput, ScrollView, SafeAreaView} from 'react-native'
 
 
 
 export default class Adder extends Component {
-    state = {  }
+    state = { 
+        seller:'', 
+        sellerPhone:'', 
+        newListName:'', 
+        street:'', 
+        city:'', 
+        state:'', 
+        zip:'', 
+        bedrooms:'', 
+        price:''
+     }
     render() {
         return (
-            <View style={styles.contain}>
-                <Text>Adder</Text>
-            </View>
+            <SafeAreaView>
+                <ScrollView>
+                    <TextInput onChangeText={this.textChanger} />
+                </ScrollView>
+            </SafeAreaView>
+        
         );
     }
 }
 
-
+seller,
+      bathrooms,
+      newListName,
+      street,
+      city,
+      state,
+      zip,
+      bedrooms,
+      price, 
 
 const styles=StyleSheet.create({
     contain: {
         flex:1, 
-        justifyContent:'center'
+        justifyContent:'space-evenly',
+        alignItems:'center' 
+
     }
 })

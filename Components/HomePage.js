@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {createStackNavigator} from 'react-navigation';
 import IndividualProperty from './IndividualProperty';
+import Adder from './Adder'
+
 
 import Property from './Property';
 import {Button} from 'react-native-elements';
