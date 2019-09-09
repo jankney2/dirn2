@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
-import {createStackNavigator} from 'react-navigation'
-import IndividualProperty from './IndividualProperty'
+import {createStackNavigator} from 'react-navigation';
+import IndividualProperty from './IndividualProperty';
 
-import Property from './Property'
+import Property from './Property';
 import {Button} from 'react-native-elements';
-import {createBottomTabNavigator, createAppContainer} from 'react-navigation'
+import {createBottomTabNavigator, createAppContainer} from 'react-navigation';
 import {connect} from 'react-redux';
-import Settings from './Settings'
+import Settings from './Settings';
+import Properties from './Properties';
 
 class HomePage extends Component {
   state = {
@@ -16,8 +17,6 @@ class HomePage extends Component {
     user: {},
     counter: 0,
   };
-  
-  
 
   render() {
     return (
@@ -46,70 +45,56 @@ class HomePage extends Component {
             );
           }}
         />
-
-
-
-
       </View>
     );
   }
 }
 
-
-
-
-const smallNav= createBottomTabNavigator({
-  settings:{
-    screen:Settings, 
-    navigationOptions: {
-      tabBarLabel:'Settings',
-
-    }
-  }, 
-  homePage:{
-    screen:HomePage, 
-    navigationOptions: {
-      tabBarLabel:'Home',
-
-    }
-  }, 
-  properties:{
-    screen:createStackNavigator({
-      properties:{
-        screen:Property
-    
-      }, 
-      individual:{
-        screen: IndividualProperty
+const smallNav = createBottomTabNavigator(
+  {
+    settings: {
+      screen: Settings,
+      navigationOptions: {
+        tabBarLabel: 'Settings',
+      },
+    },
+    homePage: {
+      screen: HomePage,
+      navigationOptions: {
+        tabBarLabel: 'Home',
+      },
+    },
+    properties: {
+      screen: Properties,
+      navigationOptions: {
+        tabBarLabel: 'Properties',
+      },
+    },
+    add: {
+      screen: Adder,
+      navigationOptions:{
+        tabBarLabel:'ADD'
       }
-    })
-  , 
-    navigationOptions: {
-      tabBarLabel:'Properties',
+    },
+  },
+  {
+    initialRouteName: 'homePage',
+    tabBarOptions: {
+      activeTintColor: 'red',
+      inactiveTintColor: 'white',
+      style: {
+        backgroundColor: 'blue',
+        shadowColor: 'black',
+        shadowOffset: {width: 5, height: 3},
+        borderTopWidth: 0,
+        shadowOpacity: 0.5,
+        elevation: 5,
+      },
+    },
+  },
+);
 
-    }
-  }, 
-
-}, {
-  initialRouteName:'homePage', 
-  tabBarOptions:{
-    activeTintColor:'red', 
-    inactiveTintColor:'white', 
-    style:{
-      backgroundColor:'blue', 
-      shadowColor:'black', 
-      shadowOffset:{width:5, height:3},
-      borderTopWidth:0,
-      shadowOpacity:0.5, 
-      elevation:5
-    }
-  }
-}); 
-
-export default createAppContainer(smallNav)
-
-
-
+export default createAppContainer(smallNav);
 
 const styles = StyleSheet.create({
   hello: {

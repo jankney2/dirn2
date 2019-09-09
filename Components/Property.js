@@ -82,6 +82,7 @@ this.props.updateDisplayProperty({
         /> */}
       </View>
       </TouchableOpacity>
+
     );
   }
 }
