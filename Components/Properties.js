@@ -21,16 +21,12 @@ class Properties extends Component {
     this.state = {
       userProperties: [],
       inputVal: '',
-      viewIndividual: true,
+      viewIndividual: false,
     };
     this.arrayHolder = [];
   }
 
-  viewIndividualToggler = () => {
-    this.setState({
-      viewIndividual: !this.state.viewIndividual,
-    });
-  };
+
 
   componentDidMount() {
     axios
@@ -45,6 +41,13 @@ class Properties extends Component {
       })
       .catch(err => Alert.alert(err));
   }
+
+
+  viewIndividualToggler = () => {
+    this.setState({
+      viewIndividual: !this.state.viewIndividual,
+    });
+  };
 
   inputChange = text => {
     const newData = this.arrayHolder.filter(el => {
@@ -89,11 +92,12 @@ class Properties extends Component {
               <Text>Properties</Text>
 
               <FlatList
+
                 data={this.state.userProperties}
                 renderItem={({item}) => {
                   return (
                     <Property
-                      viewToggler={this.state.viewIndividualToggler}
+                    viewIndividualToggler={()=>{this.viewIndividualToggler()}}
                       updatePropertyList={newData => {
                         this.setState({
                           userProperties: newData,
@@ -119,7 +123,9 @@ class Properties extends Component {
     } else {
       return (
         <View>
-          <IndividualProperty />
+          <IndividualProperty 
+          viewIndividualToggler={this.viewIndividualToggler}
+          />
         </View>
       );
     }
