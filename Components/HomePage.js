@@ -72,7 +72,7 @@ const smallNav = createBottomTabNavigator(
     add: {
       screen: Adder,
       navigationOptions: {
-        tabBarLabel: 'ADD',
+        tabBarLabel: '+',
       },
     },
   },
