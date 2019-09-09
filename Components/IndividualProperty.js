@@ -19,6 +19,8 @@ class IndividualProperty extends Component {
     console.log(this.props.property);
   }
   render() {
+
+    let {address, is_tracked, send_to_crm}=this.props.property
     if (this.state.viewInformation) {
       return (
         <View>
@@ -56,7 +58,7 @@ class IndividualProperty extends Component {
           </View>
 
           <View style={styles.addressBox}>
-            <Text>Address</Text>
+            <Text>{address}</Text>
             <Text>Disatnce away</Text>
           </View>
 

@@ -150,4 +150,4 @@ const mapStateToProps = state => {
 };
 export default connect(mapStateToProps)(Properties);
 
-//have second part off of screen and animate on when it is toggled?
+//have second part off of screen and animate it upwards/downwards when it is toggled? sounds good sounds good. 
