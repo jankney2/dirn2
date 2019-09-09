@@ -161,9 +161,25 @@ class Login extends Component {
 
           <Button title="register!"
           onPress={()=>{
-            axios.post('')
+             let {phone, firstName, email, password, lastName}=this.state
+            axios.post('https://dropin.business/auth/register', {
+              phone: phone,
+              firstName: firstName,
+              lastName: lastName,
+              email: email,
+              pass: password
+            }).then(res=>{
+
+              this.props.navigation.navigate('homePage')
+            })
           }}
           />
+
+          <Button title="cancel" onPress={()=>{
+            this.setState({
+              isRegister:!this.state.isRegister
+            })
+          }}/>
         </View>
       );
     }
