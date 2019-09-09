@@ -12,7 +12,7 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import Property from './Property';
 import {SafeAreaView} from 'react-navigation';
-import IndividualProperty from './IndividualProperty'
+import IndividualProperty from './IndividualProperty';
 import {SearchBar} from 'react-native-elements';
 
 class Properties extends Component {
@@ -119,7 +119,7 @@ class Properties extends Component {
     } else {
       return (
         <View>
-<IndividualProperty />
+          <IndividualProperty />
         </View>
       );
     }
