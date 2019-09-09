@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import {View, Text} from 'react-native'
+import {View, Text, StyleSheet, Button} from 'react-native'
  class IndividualProperty extends Component {
-    state = {  }
+    state = { 
+        selectedView:'information'
+     }
 
     componentDidMount() {
         console.log(this.props.property)
@@ -10,7 +12,18 @@ import {View, Text} from 'react-native'
     render() {
         return (
             <View>
-                <Text>Property</Text>
+<View style={styles.header}>
+<Button onPress={()=>{
+    this.setState({
+        selectedView:'information'
+    })
+}}>Information</Button>
+<Button onPress={()=>{
+    this.setState({
+        selectedView:'notes'
+    })
+}}>Notes</Button>
+</View>
             </View>
         );
     }
@@ -27,3 +40,14 @@ const mapStateToProps = state => {
     mapStateToProps,
     null,
   )(IndividualProperty);
+
+
+  const styles=StyleSheet.create({
+    header:{
+        display:'flex', 
+        flexDirection:'row', 
+        justifyContent:'space-evenly', 
+        alignItems:'center', 
+        backgroundColor:'green'
+    }
+  })

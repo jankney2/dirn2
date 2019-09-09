@@ -1,14 +1,11 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {updateDisplayProperty} from '../redux/actionsTypes'
-import {connect} from 'react-redux'
+import {updateDisplayProperty} from '../redux/actionsTypes';
+import {connect} from 'react-redux';
 import axios from 'axios';
-import {createStackNavigator, createAppContainer} from 'react-navigation'
+import {createStackNavigator, createAppContainer} from 'react-navigation';
 
-import IndividualProperty from './IndividualProperty'
-
-
-
+import IndividualProperty from './IndividualProperty';
 
 class Property extends Component {
   state = {
@@ -31,28 +28,21 @@ class Property extends Component {
 
   render() {
     return (
-      <TouchableOpacity onPress={()=>{
-this.props.updateDisplayProperty({
-  address:this.props.address, 
-  ownerName:'jacob', 
- distance:'distance'
-})
+      <TouchableOpacity
+        onPress={() => {
+          this.props.updateDisplayProperty({
+            address: this.props.address,
+            ownerName: 'jacob',
+            distance: 'distance',
+          });
+          this.props.viewToggler;
+        }}>
+        <View style={styles.contain}>
+          <Text style={styles.textHeader}>{this.props.address}</Text>
+          <Text style={styles.smallText}>Owner Name</Text>
+          <Text style={styles.smallText}>Distance Away</Text>
 
-      }}>
-      <View style={styles.contain}
-            >
-        <Text style={styles.textHeader}>{this.props.address}</Text>
-        <Text style={styles.smallText}>Owner Name</Text>
-        <Text style={styles.smallText}>Distance Away</Text>
-        
-        
-        
-        
-        
-        
-        
-        
-        {/* <Button
+          {/* <Button
           title={this.state.tracking ? 'tracking' : 'untracked'}
           buttonStyle={[
             this.state.tracking ? styles.tracking : styles.untracked,
@@ -63,7 +53,7 @@ this.props.updateDisplayProperty({
           }}
         /> */}
 
-        {/* <Button
+          {/* <Button
           title={'send to crm'}
           buttonStyle={styles.crmToggle}
           onPress={() => {
@@ -80,15 +70,11 @@ this.props.updateDisplayProperty({
               });
           }}
         /> */}
-      </View>
+        </View>
       </TouchableOpacity>
-
     );
   }
 }
-
-
-
 
 const mapDispatchToProps = {
   updateDisplayProperty,
@@ -99,23 +85,22 @@ export default connect(
   mapDispatchToProps,
 )(Property);
 
-
 const styles = StyleSheet.create({
   contain: {
     flex: 1,
     justifyContent: 'space-around',
     padding: 20,
-    borderBottomColor:'black', 
-    borderBottomWidth:1, 
-    width:'95%', 
-    marginLeft:'2.5%'
+    borderBottomColor: 'black',
+    borderBottomWidth: 1,
+    width: '95%',
+    marginLeft: '2.5%',
   },
   textHeader: {
     fontSize: 24,
     fontWeight: '600',
   },
   smallText: {
-    padding:5
+    padding: 5,
   },
 
   tracking: {
