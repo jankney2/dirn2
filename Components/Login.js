@@ -19,9 +19,13 @@ class Login extends Component {
   state = {
     phoneVal: '',
     passVal: '',
+    isRegister: false,
+    phone: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
   };
-
-
 
   changeHandler = text => {
     this.setState({
@@ -52,47 +56,117 @@ class Login extends Component {
   };
 
   render() {
-    return (
-      <SafeAreaView>
-        <KeyboardAvoidingView behavior="padding">
-          <View style={styles.logincont}>
+    if (!this.state.isRegister) {
+      return (
+        <SafeAreaView>
+          <KeyboardAvoidingView behavior="padding">
+            <View style={styles.logincont}>
+              <TextInput
+                name="phoneVal"
+                keyboardType="number-pad"
+                style={styles.inputs}
+                placeholder="Phone"
+                value={this.state.phoneVal}
+                onChangeText={text => {
+                  this.setState({
+                    phoneVal: text,
+                  });
+                }}
+              />
 
+              <TextInput
+                name="passVal"
+                style={styles.inputs}
+                secureTextEntry={true}
+                placeholder="Password"
+                onChangeText={text => {
+                  this.setState({
+                    passVal: text,
+                  });
+                }}
+              />
 
-            <TextInput
-              name="phoneVal"
-              keyboardType="number-pad"
-              style={styles.inputs}
-              placeholder="Phone"
-              value={this.state.phoneVal}
-              onChangeText={text => {
-                this.setState({
-                  phoneVal: text,
-                });
-              }}
-            />
+              <Button
+                title="login"
+                buttonStyle={styles.buttonStyle}
+                onPress={this.loginHandler}
+              />
+              <Button
+                onPress={() => {
+                  this.setState({
+                    isRegister: !this.state.isRegister,
+                  });
+                }}
+                title="Not a member? Register Here"
+              />
+            </View>
+          </KeyboardAvoidingView>
+        </SafeAreaView>
+      );
+    } else {
+      return (
+        <View>
+          <TextInput
+            style={styles.inputs}
+            autoCorrect={false}
+            placeholder="First Name"
+            onChangeText={text => {
+              this.setState({
+                firstName: text,
+              });
+            }}
+          />
+          <TextInput
+            style={styles.inputs}
+            placeholder="Last Name"
+            autoCorrect={false}
+            onChangeText={text => {
+              this.setState({
+                lastName: text,
+              });
+            }}
+          />
+          <TextInput
+            style={styles.inputs}
+            placeholder="phone number"
+            keyboardType="number-pad"
+            onChangeText={text => {
+              this.setState({
+                phone: text,
+              });
+            }}
+          />
+          <TextInput
+            style={styles.inputs}
+            autoCorrect={false}
+            placeholder="Email"
+            keyboardType="email-address"
+            onChangeText={text => {
+              this.setState({
+                email: text,
+              });
+            }}
+          />
+          <TextInput
+            style={styles.inputs}
+            autoCorrect={false}
+            placeholder="Password"
+            secureTextEntry={true}
+            onChangeText={text => {
+              this.setState({
+                password: text,
+              });
+            }}
+          />
 
-            <TextInput
-              name="passVal"
-              value={this.state.passVal}
-              style={styles.inputs}
-              secureTextEntry={true}
-              placeholder="Password"
-              onChangeText={text => {
-                this.setState({
-                  passVal: text,
-                });
-              }}
-            />
-
-            <Button
-              title="login"
-              buttonStyle={styles.buttonStyle}
-              onPress={this.loginHandler}
-            />
-          </View>
-        </KeyboardAvoidingView>
-      </SafeAreaView>
-    );
+          <Button title="register!"
+          onPress={()=>{
+            axios.post('')
+          }}
+          />
+        </View>
+      );
+    }
   }
 }
 
@@ -120,8 +194,7 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     marginTop: 50,
-    backgroundColor:'blue', 
-
+    backgroundColor: 'blue',
   },
 });
 

@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {createStackNavigator} from 'react-navigation';
 import IndividualProperty from './IndividualProperty';
-import Adder from './Adder'
-
+import Adder from './Adder';
 
 import Property from './Property';
 import {Button} from 'react-native-elements';
@@ -23,11 +22,9 @@ class HomePage extends Component {
   render() {
     return (
       <View style={styles.hello}>
-        <Text style={styles.header}>Begin location tracking</Text>
-        <Text>{`Coords:${this.state.latitude} ${this.state.longitude}`}</Text>
         <Button
           buttonStyle={styles.button}
-          title="click for location"
+          title="Get Closest Property"
           onPress={() => {
             navigator.geolocation.getCurrentPosition(
               position => {
@@ -74,9 +71,9 @@ const smallNav = createBottomTabNavigator(
     },
     add: {
       screen: Adder,
-      navigationOptions:{
-        tabBarLabel:'ADD'
-      }
+      navigationOptions: {
+        tabBarLabel: 'ADD',
+      },
     },
   },
   {
