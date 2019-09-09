@@ -124,7 +124,7 @@ class Properties extends Component {
       return (
         <View>
           <IndividualProperty 
-          viewIndividualToggler={this.viewIndividualToggler}
+          viewIndividualToggler={()=>{this.viewIndividualToggler()}}
           />
         </View>
       );

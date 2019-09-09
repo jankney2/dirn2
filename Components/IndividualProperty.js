@@ -1,12 +1,18 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {View, Text, StyleSheet, Button, KeyboardAvoidingView} from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  KeyboardAvoidingView,
+} from 'react-native';
+import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import Axios from 'axios';
 class IndividualProperty extends Component {
   state = {
     viewInformation: true,
-    newNoteInput:'', 
+    newNoteInput: '',
   };
 
   componentDidMount() {
@@ -16,6 +22,12 @@ class IndividualProperty extends Component {
     if (this.state.viewInformation) {
       return (
         <View>
+          <TouchableOpacity onPress={()=>{
+              this.props.viewIndividualToggler()
+              console.log('fweoaijfowaeijfo')
+          }}>
+            <Text>X</Text>
+          </TouchableOpacity>
           <View style={styles.header}>
             <Button
               title="information"
@@ -58,8 +70,7 @@ class IndividualProperty extends Component {
             <Text>Phone</Text>
             <Text>Email</Text>
           </View>
-          
-          
+
           <View style={styles.houseDetails}>
             <Text>HouseDetails</Text>
             <Text>Desired Price</Text>
@@ -67,12 +78,17 @@ class IndividualProperty extends Component {
             <Text>Bathrooms</Text>
             <Text>Sq Footage</Text>
           </View>
-
         </View>
       );
     } else {
       return (
-        <KeyboardAvoidingView behavior='padding'>
+        <KeyboardAvoidingView behavior="position">
+          <TouchableOpacity onPress={()=>{
+              this.props.viewIndividualToggler()
+              console.log('fweoaijfowaeijfo')
+          }}>
+            <Text>X</Text>
+          </TouchableOpacity>
           <View style={styles.header}>
             <Button
               title="information"
@@ -92,37 +108,41 @@ class IndividualProperty extends Component {
               }}
             />
           </View>
-              <View style={styles.notesView}>
-                  <Text>Owner Name</Text>
-              <Text>User Notes from Redux</Text>
+          <View style={styles.notesView}>
+            <Text>Owner Name</Text>
+            <Text>User Notes from Redux</Text>
 
-                <TextInput 
-                multiline={true}
-                placeholder="Add note..."
-                style={{width:'80%', 
-                        marginLeft:'10%', 
-                        borderColor:'black', 
-                        borderWidth:1, 
-                        height:'70%'
-                }}
-                onChangeText={(text)=>{
-                    this.setState({
-                        newNoteInput:text
-                    })
-                }} />              
-                <Text>Characters Left:{this.state.newNoteInput.length}/1000 {this.props.property.property_id}</Text>
+            <TextInput
+              multiline={true}
+              placeholder="Add note..."
+              style={{
+                width: '80%',
+                marginLeft: '10%',
+                borderColor: 'black',
+                borderWidth: 1,
+                height: '70%',
+              }}
+              onChangeText={text => {
+                this.setState({
+                  newNoteInput: text,
+                });
+              }}
+            />
+            <Text>
+              Characters Left:{this.state.newNoteInput.length}/1000{' '}
+              {this.props.property.property_id}
+            </Text>
 
-                <Button title='save note'
-                onPress={()=>{
-                    Axios.put(`https://dropin.business/properties/addNote/${this.props.property.property_id}`, {
-
-                    })
-                }}
-                />
-              </View>
-
-
-
+            <Button
+              title="save note"
+              onPress={() => {
+                Axios.put(
+                  `https://dropin.business/properties/addNote/${this.props.property.property_id}`,
+                  {},
+                );
+              }}
+            />
+          </View>
         </KeyboardAvoidingView>
       );
     }

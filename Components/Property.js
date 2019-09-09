@@ -38,6 +38,7 @@ class Property extends Component {
           this.props.viewIndividualToggler()
         }}>
         <View style={styles.contain}>
+
           <Text style={styles.textHeader}>{this.props.address}</Text>
           <Text style={styles.smallText}>Owner Name</Text>
           <Text style={styles.smallText}>Distance Away</Text>
