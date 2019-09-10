@@ -4,13 +4,14 @@ import {createStackNavigator} from 'react-navigation';
 import IndividualProperty from './IndividualProperty';
 import Adder from './Adder';
 import CrmList from './CrmList'
-
+import updatePropertyDistances from '../redux/actionsTypes'
 import Property from './Property';
 import {Button} from 'react-native-elements';
 import {createBottomTabNavigator, createAppContainer} from 'react-navigation';
 import {connect} from 'react-redux';
 import Settings from './Settings';
 import Properties from './Properties';
+import Axios from 'axios';
 
 class HomePage extends Component {
   state = {
@@ -19,6 +20,41 @@ class HomePage extends Component {
     user: {},
     counter: 0,
   };
+
+propertyFinder=()=>{
+
+  navigator.geolocation.getCurrentPosition(
+    position => {
+      this.setState({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+      });
+
+    },
+    err => {
+      console.log(err);
+    },
+  );
+console.log(this.state)
+
+//   Axios.post('https://dropin.business/findClosest', {
+//     userId:this.props.activeUser.user_id, 
+//     latitude:this.state.latitude,
+//     longitude:this.state.longitude
+
+//   }).then(res=>{
+//     //response should be properties with distances on them (ordered on backend? )
+// let response=res.splice(0, 3)
+// this.props.updatePropertyDistances(response)
+
+//   })
+}
+
+componentDidMount() {
+  this.propertyFinder()
+}
+
+
 
   render() {
     return (
@@ -34,10 +70,6 @@ class HomePage extends Component {
                   longitude: position.coords.longitude,
                 });
 
-                // axios.post(`https://dropin.business/api/test/${this.props.activeUser.user_id}`, {
-                //   userLat:this.state.latitude,
-                //   userLong:this.state.longitude
-                // })
               },
               err => {
                 console.log(err);
@@ -117,4 +149,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
   return {activeUser: state.user};
 };
+const mapDispatchToProps={
+updatePropertyDistances
+}
+
 connect(mapStateToProps)(HomePage);

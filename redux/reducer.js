@@ -2,6 +2,7 @@
 
 
 
+
 const initialState={
     user:{},
     displayProperty: {}
@@ -17,6 +18,10 @@ export const mobileReducer=(state=initialState, action)=>{
         case 'UPDATE_DISPLAY_PROPERTY':
 
         return {...state, displayProperty:action.payload}
+
+        case 'UPDATE_DISTANCES':
+            console.log('distances')
+            return {...state, propertiesWithDistance:action.payload}
 
         
         default:

@@ -13,3 +13,10 @@ export const updateDisplayProperty=(response)=>{
     }
 
 }
+
+export const updatePropertyDistances=(response)=>{
+    return {
+        type:'UPDATE_DISTANCES', 
+        payload:response
+    }
+}
