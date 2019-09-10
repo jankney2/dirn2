@@ -3,6 +3,7 @@ import {Text, View, StyleSheet} from 'react-native';
 import {createStackNavigator} from 'react-navigation';
 import IndividualProperty from './IndividualProperty';
 import Adder from './Adder';
+import CrmList from './CrmList'
 
 import Property from './Property';
 import {Button} from 'react-native-elements';
@@ -69,15 +70,15 @@ const smallNav = createBottomTabNavigator(
         tabBarLabel: 'Properties',
       },
     },
-    add: {
-      screen: Adder,
+    CRM: {
+      screen: CrmList,
       navigationOptions: {
-        tabBarLabel: '+',
+        tabBarLabel: 'CRM List',
       },
     },
   },
   {
-    initialRouteName: 'homePage',
+    initialRouteName: 'properties',
     tabBarOptions: {
       activeTintColor: 'red',
       inactiveTintColor: 'white',

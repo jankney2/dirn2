@@ -118,7 +118,7 @@ class IndividualProperty extends Component {
           </View>
           <View style={styles.notesView}>
             <Text style={styles.h1}>{ownerName}</Text>
-            <Text>User Notes from Redux</Text>
+            <Text>Notes:{this.props.property.notes}</Text>
 
             <TextInput
               multiline={true}

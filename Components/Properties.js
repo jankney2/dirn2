@@ -103,6 +103,8 @@ class Properties extends Component {
                           userProperties: newData,
                         });
                       }}
+                      notes={item.user_notes}
+
                       price={item.price}
                       bedrooms={item.bedrooms}
                       bathrooms={item.bathrooms}
@@ -128,6 +130,7 @@ class Properties extends Component {
       return (
 
           <IndividualProperty 
+
           viewIndividualToggler={()=>{this.viewIndividualToggler()}}
           />
 

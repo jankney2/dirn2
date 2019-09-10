@@ -7,10 +7,13 @@ import {createStackNavigator, createAppContainer} from 'react-navigation';
 
 import IndividualProperty from './IndividualProperty';
 
+
 class Property extends Component {
   state = {
     tracking: this.props.tracking,
   };
+
+  
 
   trackingToggler = () => {
     axios
@@ -36,14 +39,15 @@ class Property extends Component {
             distance: 'distance',
             price:this.props.price, 
             bedrooms:this.props.bedrooms, 
-            bathrooms:this.props.bathrooms
+            bathrooms:this.props.bathrooms, 
+            notes:this.props.notes
           });
           this.props.viewIndividualToggler()
         }}>
         <View style={styles.contain}>
 
           <Text style={styles.textHeader}>{this.props.address}</Text>
-          <Text style={styles.smallText}>Owner Name</Text>
+          <Text style={styles.smallText}>Owner:{this.props.owner}</Text>
           <Text style={styles.smallText}>Distance Away</Text>
 
           {/* <Button
