@@ -99,6 +99,13 @@ class Login extends Component {
                 }}
                 title="Not a member? Register Here"
               />
+
+
+              <Button title='location' onPress={()=>{
+                navigator.geolocation.getCurrentPosition(position=>{
+                  console.log('lat and long', position.coords.latitude, position.coords.longitude)
+                })
+              }} />
             </View>
           </KeyboardAvoidingView>
         </SafeAreaView>

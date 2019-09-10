@@ -26,14 +26,39 @@ class Properties extends Component {
     this.arrayHolder = [];
   }
 
-
-
   componentDidMount() {
+
+
+    // navigator.geolocation.getCurrentPosition(position=>{
+    //   this.setState({
+    //     latitude:position.coords.latitude, 
+    //     longitude:position.coords.longitude
+    //   })
+    //   })
+
+    // navigator.geolocation.getCurrentPosition(
+    //   position => {
+    //     this.setState({
+    //       latitude: position.coords.latitude,
+    //       longitude: position.coords.longitude,
+    //     });
+  
+    //   },
+    //   err => {
+    //     console.log(err);
+    //   },
+    // )
+    
     axios
-      .get(
-        `https://dropin.business/api/userProperties/${this.props.activeUser.user_id}`,
+      .post(
+        `https://dropin.business/api/userProperties/calcDistance/${this.props.activeUser.user_id}`,
+        {
+          latitude: this.state.latitude,
+          longitude: this.state.longitude,
+        },
       )
       .then(res => {
+        console.log(res.data);
         this.setState({
           userProperties: res.data,
         });
@@ -41,7 +66,6 @@ class Properties extends Component {
       })
       .catch(err => Alert.alert(err));
   }
-
 
   viewIndividualToggler = () => {
     this.setState({
@@ -92,19 +116,19 @@ class Properties extends Component {
               <Text>Properties</Text>
 
               <FlatList
-
                 data={this.state.userProperties}
                 renderItem={({item}) => {
                   return (
                     <Property
-                    viewIndividualToggler={()=>{this.viewIndividualToggler()}}
+                      viewIndividualToggler={() => {
+                        this.viewIndividualToggler();
+                      }}
                       updatePropertyList={newData => {
                         this.setState({
                           userProperties: newData,
                         });
                       }}
                       notes={item.user_notes}
-
                       price={item.price}
                       bedrooms={item.bedrooms}
                       bathrooms={item.bathrooms}
@@ -128,12 +152,11 @@ class Properties extends Component {
       );
     } else {
       return (
-
-          <IndividualProperty 
-
-          viewIndividualToggler={()=>{this.viewIndividualToggler()}}
-          />
-
+        <IndividualProperty
+          viewIndividualToggler={() => {
+            this.viewIndividualToggler();
+          }}
+        />
       );
     }
   }
@@ -157,4 +180,4 @@ const mapStateToProps = state => {
 };
 export default connect(mapStateToProps)(Properties);
 
-//have second part off of screen and animate it upwards/downwards when it is toggled? sounds good sounds good. 
+//have second part off of screen and animate it upwards/downwards when it is toggled? sounds good sounds good.
