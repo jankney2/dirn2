@@ -93,7 +93,7 @@ class IndividualProperty extends Component {
           <TouchableOpacity
             onPress={() => {
               this.props.viewIndividualToggler();
-              console.log('fweoaijfowaeijfo');
+
             }}>
             <Text>X</Text>
           </TouchableOpacity>
