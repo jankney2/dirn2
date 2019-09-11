@@ -5,11 +5,13 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import IndividualProperty from './IndividualProperty'
 
+
 class CrmList extends Component {
   state = {
     userProperties: [],
   };
   componentDidMount() {
+
     axios
       .get(
         `https://dropin.business/api/userProperties/${this.props.activeUser.user_id}`,
@@ -20,7 +22,7 @@ class CrmList extends Component {
         });
         this.arrayHolder = res.data;
       })
-      .catch(err => Alert.alert(err));
+      .catch(err => console.log(err));
   }
   viewIndividualToggler = () => {
     this.setState({
