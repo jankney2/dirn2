@@ -1,8 +1,9 @@
 import React from 'react';
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import {SafeAreaView} from 'react-native'
-import Login from './Components/Login';
-import HomePage, {SmallNav} from './Components/HomePage'
+import Login from './Components/Login'; 
+import HomePage from './Components/HomePage'
+import {SmallNav} from './Components/TabNav'
 import {Provider} from 'react-redux'
 import Header from './Components/Header'
 import {createStore} from 'redux'

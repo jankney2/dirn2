@@ -3,59 +3,56 @@ import {Text, View, StyleSheet} from 'react-native';
 import {createStackNavigator} from 'react-navigation';
 import IndividualProperty from './IndividualProperty';
 import Adder from './Adder';
-import Geolocation from '@react-native-community/geolocation'
-import CrmList from './CrmList'
-import updatePropertyDistances from '../redux/actionsTypes'
+import Geolocation from '@react-native-community/geolocation';
+import CrmList from './CrmList';
+import updatePropertyDistances from '../redux/actionsTypes';
 import Property from './Property';
 import {Button} from 'react-native-elements';
-import {createBottomTabNavigator, createAppContainer} from 'react-navigation';
+
 import {connect} from 'react-redux';
 import Settings from './Settings';
 import Properties from './Properties';
 import Axios from 'axios';
- class HomePage extends Component {
+import {FlatList} from 'react-native-gesture-handler';
+class HomePage extends Component {
   state = {
     latitude: '',
     longitude: '',
     user: {},
-
+    refreshing:false
   };
 
-propertyFinder=()=>{
-
-  Geolocation.getCurrentPosition(
-    position => {
+  propertyFinder = () => {
+    Geolocation.getCurrentPosition(position => {
       this.setState({
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
       });
 
-      Axios
-    .post(
-      `https://dropin.business/api/userProperties/calcDistance/${this.props.activeUser.user_id}`,
-      {
-        latitude: this.state.latitude,
-        longitude: this.state.longitude,
-      },
-    )
-    .then(res => {
-      console.log(res.data, 'data');
-      this.setState({
-        userProperties: res.data,
+      Axios.post(
+        `https://dropin.business/api/userProperties/calcDistance/${this.props.activeUser.user_id}`,
+        {
+          latitude: this.state.latitude,
+          longitude: this.state.longitude,
+        },
+      ).then(res => {
+        let spliced = res.data
+          .sort(function(a, b) {
+            return +a.distance - +b.distance;
+          })
+          .splice(0, 3);
+
+        this.setState({
+          userProperties: spliced,
+        });
       });
+    });
+  };
 
-    })
-
-    }
-  );
-}
-
-
-componentDidMount() {
-  console.log(this.props.activeUser, 'user')
-}
-
-
+  componentDidMount() {
+    this.propertyFinder();
+    console.log(this.props.activeUser, 'user');
+  }
 
   render() {
     return (
@@ -64,8 +61,49 @@ componentDidMount() {
           buttonStyle={styles.button}
           title="Get Closest Property"
           onPress={() => {
-            // this.propertyFinder()
+            this.propertyFinder()
           }}
+        />
+
+        <FlatList
+        refreshing={this.state.refreshing}
+        onRefresh={()=>{
+          this.setState({
+            refreshing:true
+          })
+          this.propertyFinder()
+      
+        }}
+          data={this.state.userProperties}
+          renderItem={({item}) => {
+            return (
+              <Property
+                viewIndividualToggler={() => {
+                  this.viewIndividualToggler();
+                }}
+                updatePropertyList={newData => {
+                  this.setState({
+                    userProperties: newData,
+                  });
+                }}
+                distance={item.distance}
+                notes={item.user_notes}
+                price={item.price}
+                bedrooms={item.bedrooms}
+                bathrooms={item.bathrooms}
+                owner={item.seller}
+                searchVal={this.state.inputVal}
+                owningUser={this.props.activeUser.user_id}
+                updateUserProperties={this.updateUserProperties}
+                address={`${item.street}, ${item.city}`}
+                tracking={item.is_tracked}
+                crmStatus={item.send_to_crm}
+                deleteId={item.property_id}
+                style={{textAlign: 'center'}}
+              />
+            );
+          }}
+          keyExtractor={item => item.property_id.toString()}
         />
       </View>
     );
@@ -80,8 +118,6 @@ const mapStateToProps = state => {
 // }
 
 export default connect(mapStateToProps)(HomePage);
-
-
 
 const styles = StyleSheet.create({
   hello: {
@@ -100,52 +136,3 @@ const styles = StyleSheet.create({
     width: 200,
   },
 });
-
-
-
-
-const small = createBottomTabNavigator(
-  {
-    settings: {
-      screen: Settings,
-      navigationOptions: {
-        tabBarLabel: 'Settings',
-      },
-    },
-    homePage: {
-      screen: HomePage,
-      navigationOptions: {
-        tabBarLabel: 'Home',
-      },
-    },
-    properties: {
-      screen: Properties,
-      navigationOptions: {
-        tabBarLabel: 'Properties',
-      },
-    },
-    CRM: {
-      screen: CrmList,
-      navigationOptions: {
-        tabBarLabel: 'CRM List',
-      },
-    },
-  },
-  {
-    initialRouteName: 'homePage',
-    tabBarOptions: {
-      activeTintColor: 'red',
-      inactiveTintColor: 'white',
-      style: {
-        backgroundColor: 'blue',
-        shadowColor: 'black',
-        shadowOffset: {width: 5, height: 3},
-        borderTopWidth: 0,
-        shadowOpacity: 0.5,
-        elevation: 5,
-      },
-    },
-  },
-);
-
-export const SmallNav=createAppContainer(small);
