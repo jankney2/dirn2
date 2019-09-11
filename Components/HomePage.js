@@ -13,8 +13,7 @@ import {connect} from 'react-redux';
 import Settings from './Settings';
 import Properties from './Properties';
 import Axios from 'axios';
-
-class HomePage extends Component {
+ class HomePage extends Component {
   state = {
     latitude: '',
     longitude: '',
@@ -31,24 +30,30 @@ propertyFinder=()=>{
         longitude: position.coords.longitude,
       });
 
+      Axios
+    .post(
+      `https://dropin.business/api/userProperties/calcDistance/${this.props.activeUser.user_id}`,
+      {
+        latitude: this.state.latitude,
+        longitude: this.state.longitude,
+      },
+    )
+    .then(res => {
+      console.log(res.data, 'data');
+      this.setState({
+        userProperties: res.data,
+      });
+
+    })
+
     }
   );
-console.log( 'state',this.state)
-
-//   Axios.post('https://dropin.business/findClosest', {
-//     userId:this.props.activeUser.user_id, 
-//     latitude:this.state.latitude,
-//     longitude:this.state.longitude
-
-//   }).then(res=>{
-//     //response should be properties with distances on them (ordered on backend? )
-// let response=res.splice(0, 3)
-// this.props.updatePropertyDistances(response)
-
-//   })
 }
 
 
+componentDidMount() {
+  console.log(this.props.activeUser, 'user')
+}
 
 
 
@@ -67,7 +72,39 @@ console.log( 'state',this.state)
   }
 }
 
-const smallNav = createBottomTabNavigator(
+const mapStateToProps = state => {
+  return {activeUser: state.user};
+};
+// const mapDispatchToProps={
+// updatePropertyDistances
+// }
+
+export default connect(mapStateToProps)(HomePage);
+
+
+
+const styles = StyleSheet.create({
+  hello: {
+    // height:,
+    // width:350,
+    padding: 10,
+    flex: 1,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  header: {
+    fontSize: 24,
+    textAlign: 'center',
+  },
+  button: {
+    width: 200,
+  },
+});
+
+
+
+
+const small = createBottomTabNavigator(
   {
     settings: {
       screen: Settings,
@@ -111,31 +148,4 @@ const smallNav = createBottomTabNavigator(
   },
 );
 
-export default createAppContainer(smallNav);
-
-const styles = StyleSheet.create({
-  hello: {
-    // height:,
-    // width:350,
-    padding: 10,
-    flex: 1,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
-  header: {
-    fontSize: 24,
-    textAlign: 'center',
-  },
-  button: {
-    width: 200,
-  },
-});
-
-const mapStateToProps = state => {
-  return {activeUser: state.user};
-};
-const mapDispatchToProps={
-updatePropertyDistances
-}
-
-connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export const SmallNav=createAppContainer(small);
