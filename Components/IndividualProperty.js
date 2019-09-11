@@ -19,7 +19,7 @@ class IndividualProperty extends Component {
     console.log(this.props.property);
   }
   render() {
-    let {address,ownerName, is_tracked, send_to_crm, bedrooms, bathrooms, price} = this.props.property;
+    let {address,ownerName, is_tracked, send_to_crm, bedrooms, bathrooms, price, distance} = this.props.property;
     if (this.state.viewInformation) {
       return (
         <View
@@ -64,7 +64,7 @@ class IndividualProperty extends Component {
           <View style={styles.addressBox}>
             <Text style={styles.lighten}>Address</Text>
             <Text>{address}</Text>
-            <Text>Disatnce away</Text>
+            <Text>{distance}</Text>
           </View>
 
           <View style={styles.mapsView}>

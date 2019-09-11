@@ -36,7 +36,7 @@ class Property extends Component {
           this.props.updateDisplayProperty({
             address: this.props.address,
             ownerName: this.props.owner,
-            distance: 'distance',
+            distance: this.props.distance,
             price:this.props.price, 
             bedrooms:this.props.bedrooms, 
             bathrooms:this.props.bathrooms, 
@@ -48,7 +48,7 @@ class Property extends Component {
 
           <Text style={styles.textHeader}>{this.props.address}</Text>
           <Text style={styles.smallText}>Owner:{this.props.owner}</Text>
-          <Text style={styles.smallText}>Distance Away</Text>
+          <Text style={styles.smallText}>{this.props.distance} miles away</Text>
 
           {/* <Button
           title={this.state.tracking ? 'tracking' : 'untracked'}

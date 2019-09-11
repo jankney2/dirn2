@@ -11,6 +11,7 @@ import {
 import axios from 'axios';
 import {connect} from 'react-redux';
 import Property from './Property';
+import Geolocation from '@react-native-community/geolocation'
 import {SafeAreaView} from 'react-navigation';
 import IndividualProperty from './IndividualProperty';
 import {SearchBar} from 'react-native-elements';
@@ -26,45 +27,39 @@ class Properties extends Component {
     this.arrayHolder = [];
   }
 
-  componentDidMount() {
+ componentDidMount()  {
 
+   Geolocation.getCurrentPosition(
+      position => {
+        this.setState({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
 
-    // navigator.geolocation.getCurrentPosition(position=>{
-    //   this.setState({
-    //     latitude:position.coords.latitude, 
-    //     longitude:position.coords.longitude
-    //   })
-    //   })
+            axios
+      .post(
+        `https://dropin.business/api/userProperties/calcDistance/${this.props.activeUser.user_id}`,
+        {
+          latitude: this.state.latitude,
+          longitude: this.state.longitude,
+        },
+      )
+      .then(res => {
+        console.log(res.data, 'data');
+        this.setState({
+          userProperties: res.data,
+        });
+        this.arrayHolder = res.data;
+      })
+      .catch(err => Alert.alert(err));
+        
 
-    // navigator.geolocation.getCurrentPosition(
-    //   position => {
-    //     this.setState({
-    //       latitude: position.coords.latitude,
-    //       longitude: position.coords.longitude,
-    //     });
-  
-    //   },
-    //   err => {
-    //     console.log(err);
-    //   },
-    // )
-    
-    // axios
-    //   .post(
-    //     `https://dropin.business/api/userProperties/calcDistance/${this.props.activeUser.user_id}`,
-    //     {
-    //       latitude: this.state.latitude,
-    //       longitude: this.state.longitude,
-    //     },
-    //   )
-    //   .then(res => {
-    //     console.log(res.data);
-    //     this.setState({
-    //       userProperties: res.data,
-    //     });
-    //     this.arrayHolder = res.data;
-    //   })
-    //   .catch(err => Alert.alert(err));
+      },
+      err => {
+        console.log(err);
+      },
+      )
+
   }
 
   viewIndividualToggler = () => {
@@ -128,6 +123,7 @@ class Properties extends Component {
                           userProperties: newData,
                         });
                       }}
+                      distance={item.distance}
                       notes={item.user_notes}
                       price={item.price}
                       bedrooms={item.bedrooms}
