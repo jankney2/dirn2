@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {setUser} from '../redux/actionsTypes';
+import Geolocation from '@react-native-community/geolocation'
 import {
   View,
   Text,
@@ -101,11 +102,17 @@ class Login extends Component {
               />
 
 
-              <Button title='location' onPress={()=>{
-                navigator.geolocation.getCurrentPosition(position=>{
-                  console.log('lat and long', position.coords.latitude, position.coords.longitude)
+              <Button title='location'
+              
+              onPress={()=>{
+                Geolocation.getCurrentPosition(info=>{
+                  console.log(info.coords) 
                 })
-              }} />
+                // navigator.geolocation.getCurrentPosition(position=>{
+                //   console.log('lat and long', position.coords.latitude, position.coords.longitude)
+                // })
+              }}
+               />
             </View>
           </KeyboardAvoidingView>
         </SafeAreaView>
@@ -229,3 +236,6 @@ export default connect(
   null,
   mapDispatchToProps,
 )(Login);
+
+
+

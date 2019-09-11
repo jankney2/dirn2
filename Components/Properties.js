@@ -49,22 +49,22 @@ class Properties extends Component {
     //   },
     // )
     
-    axios
-      .post(
-        `https://dropin.business/api/userProperties/calcDistance/${this.props.activeUser.user_id}`,
-        {
-          latitude: this.state.latitude,
-          longitude: this.state.longitude,
-        },
-      )
-      .then(res => {
-        console.log(res.data);
-        this.setState({
-          userProperties: res.data,
-        });
-        this.arrayHolder = res.data;
-      })
-      .catch(err => Alert.alert(err));
+    // axios
+    //   .post(
+    //     `https://dropin.business/api/userProperties/calcDistance/${this.props.activeUser.user_id}`,
+    //     {
+    //       latitude: this.state.latitude,
+    //       longitude: this.state.longitude,
+    //     },
+    //   )
+    //   .then(res => {
+    //     console.log(res.data);
+    //     this.setState({
+    //       userProperties: res.data,
+    //     });
+    //     this.arrayHolder = res.data;
+    //   })
+    //   .catch(err => Alert.alert(err));
   }
 
   viewIndividualToggler = () => {

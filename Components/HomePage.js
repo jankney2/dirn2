@@ -3,6 +3,7 @@ import {Text, View, StyleSheet} from 'react-native';
 import {createStackNavigator} from 'react-navigation';
 import IndividualProperty from './IndividualProperty';
 import Adder from './Adder';
+import Geolocation from '@react-native-community/geolocation'
 import CrmList from './CrmList'
 import updatePropertyDistances from '../redux/actionsTypes'
 import Property from './Property';
@@ -18,24 +19,21 @@ class HomePage extends Component {
     latitude: '',
     longitude: '',
     user: {},
-    counter: 0,
+
   };
 
 propertyFinder=()=>{
 
-  navigator.geolocation.getCurrentPosition(
+  Geolocation.getCurrentPosition(
     position => {
       this.setState({
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
       });
 
-    },
-    err => {
-      console.log(err);
-    },
+    }
   );
-console.log(this.state)
+console.log( 'state',this.state)
 
 //   Axios.post('https://dropin.business/findClosest', {
 //     userId:this.props.activeUser.user_id, 
@@ -50,9 +48,7 @@ console.log(this.state)
 //   })
 }
 
-componentDidMount() {
-  this.propertyFinder()
-}
+
 
 
 
@@ -63,18 +59,7 @@ componentDidMount() {
           buttonStyle={styles.button}
           title="Get Closest Property"
           onPress={() => {
-            navigator.geolocation.getCurrentPosition(
-              position => {
-                this.setState({
-                  latitude: position.coords.latitude,
-                  longitude: position.coords.longitude,
-                });
-
-              },
-              err => {
-                console.log(err);
-              },
-            );
+            // this.propertyFinder()
           }}
         />
       </View>
@@ -110,7 +95,7 @@ const smallNav = createBottomTabNavigator(
     },
   },
   {
-    initialRouteName: 'properties',
+    initialRouteName: 'homePage',
     tabBarOptions: {
       activeTintColor: 'red',
       inactiveTintColor: 'white',
@@ -153,4 +138,4 @@ const mapDispatchToProps={
 updatePropertyDistances
 }
 
-connect(mapStateToProps)(HomePage);
+connect(mapStateToProps, mapDispatchToProps)(HomePage);
