@@ -103,8 +103,8 @@ class Properties extends Component {
           />
 
           <ScrollView>
-            <View style={styles.contain}>
-              <Text>Properties</Text>
+            <View>
+            
 
               <FlatList
                 data={this.state.userProperties}

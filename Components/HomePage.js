@@ -11,7 +11,7 @@ import {Button} from 'react-native-elements';
 
 import {connect} from 'react-redux';
 import Settings from './Settings';
-import Properties from './Properties';
+import Properties from './AllProperties';
 import Axios from 'axios';
 import {FlatList} from 'react-native-gesture-handler';
 class HomePage extends Component {
@@ -28,7 +28,7 @@ class HomePage extends Component {
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
       });
-
+      console.log(this.state.latitude, this.state.longitude, 'coords')
       Axios.post(
         `https://dropin.business/api/userProperties/calcDistance/${this.props.activeUser.user_id}`,
         {
@@ -57,13 +57,6 @@ class HomePage extends Component {
   render() {
     return (
       <View style={styles.hello}>
-        <Button
-          buttonStyle={styles.button}
-          title="Get Closest Property"
-          onPress={() => {
-            this.propertyFinder()
-          }}
-        />
 
         <FlatList
         refreshing={this.state.refreshing}
@@ -123,10 +116,10 @@ const styles = StyleSheet.create({
   hello: {
     // height:,
     // width:350,
-    padding: 10,
+    // padding: 10,
     flex: 1,
-    justifyContent: 'space-around',
-    alignItems: 'center',
+    // justifyContent: 'space-around',
+    // alignItems: 'center',
   },
   header: {
     fontSize: 24,

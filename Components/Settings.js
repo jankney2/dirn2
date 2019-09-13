@@ -3,16 +3,23 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet, Button} from 'react-native';
 import {connect} from 'react-redux';
 import Axios from 'axios';
-export default class Settings extends Component {
+
+
+
+class Settings extends Component {
   state = {};
   render() {
+
+    phoneSplitter=(str)=>{
+      let newStr=str.split('')
+    }
     return (
       <View style={styles.container}>
         <View style={styles.section}>
           <Text style={styles.heading}>Account</Text>
-          <Text>FirstName LastName</Text>
-          <Text>Email</Text>
-          <Text>Phone Number</Text>
+          <Text>{this.props.activeUser.first_name} {this.props.activeUser.last_name}</Text>
+          <Text>Email: {this.props.activeUser.user_email}</Text>
+          <Text>Phone: {this.props.activeUser.user_phone}</Text>
 <View style={{
     display:'flex', 
     flexDirection:'row', 
@@ -20,12 +27,6 @@ export default class Settings extends Component {
     alignItems:'center'
 }}>
 
-    <Text>Password</Text>
-          <Button 
-
-          color="black"
-          buttonStyle={styles.button}
-          title="Change Password" />
 
 </View>
         </View>
@@ -49,6 +50,13 @@ export default class Settings extends Component {
     );
   }
 }
+
+
+const mapStateToProps=(state)=> {
+  return {activeUser:state.user}
+}
+
+export default connect(mapStateToProps)(Settings)
 
 const styles = StyleSheet.create({
   section: {

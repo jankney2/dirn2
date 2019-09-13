@@ -33,6 +33,8 @@ target 'dropIn2' do
 
   pod 'react-native-geolocation', :path => '../node_modules/@react-native-community/geolocation'
 
+  pod 'react-native-maps', :path => '../node_modules/react-native-maps'
+
   target 'dropIn2Tests' do
     inherit! :search_paths
     # Pods for testing

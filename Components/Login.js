@@ -78,6 +78,7 @@ class Login extends Component {
               <TextInput
                 name="passVal"
                 style={styles.inputs}
+                value={this.state.passVal}
                 secureTextEntry={true}
                 placeholder="Password"
                 onChangeText={text => {
@@ -102,17 +103,6 @@ class Login extends Component {
               />
 
 
-              <Button title='location'
-              
-              onPress={()=>{
-                Geolocation.getCurrentPosition(info=>{
-                  console.log(info.coords) 
-                })
-                // navigator.geolocation.getCurrentPosition(position=>{
-                //   console.log('lat and long', position.coords.latitude, position.coords.longitude)
-                // })
-              }}
-               />
             </View>
           </KeyboardAvoidingView>
         </SafeAreaView>

@@ -7,6 +7,7 @@ import {
   Button,
   KeyboardAvoidingView,
 } from 'react-native';
+import MapView from 'react-native-maps'
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import Axios from 'axios';
 class IndividualProperty extends Component {
@@ -68,7 +69,15 @@ class IndividualProperty extends Component {
           </View>
 
           <View style={styles.mapsView}>
-            <Text>Google Maps View</Text>
+<MapView 
+style={{flex:1}}
+initialRegion={{
+  latitude:40.2222,
+  longitude:-111.3333,
+  latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+}}
+/>
           </View>
 
           <View style={styles.contactBox}>

@@ -2,7 +2,7 @@ import {createBottomTabNavigator, createAppContainer} from 'react-navigation'
 import Settings from './Settings'
 import HomePage from './HomePage'
 import 
-Properties from './Properties'
+AllProperties from './AllProperties'
 import CrmList from './CrmList'
 const small = createBottomTabNavigator(
     {
@@ -19,7 +19,7 @@ const small = createBottomTabNavigator(
         },
       },
       properties: {
-        screen: Properties,
+        screen: AllProperties,
         navigationOptions: {
           tabBarLabel: 'Properties',
         },

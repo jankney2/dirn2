@@ -46,9 +46,9 @@ class Property extends Component {
         }}>
         <View style={styles.contain}>
 
-          <Text style={styles.textHeader}>{this.props.address}</Text>
-          <Text style={styles.smallText}>Owner:{this.props.owner}</Text>
-          <Text style={styles.smallText}>{this.props.distance} miles away</Text>
+          <Text style={styles.textHeader}>{this.props.owner}</Text>
+          <Text style={styles.smallText}>{this.props.address}</Text>
+          <Text style={[styles.smallText, styles.blueText]}>{this.props.distance} miles away</Text>
 
           {/* <Button
           title={this.state.tracking ? 'tracking' : 'untracked'}
@@ -97,11 +97,13 @@ const styles = StyleSheet.create({
   contain: {
     flex: 1,
     justifyContent: 'space-around',
-    padding: 20,
-    borderBottomColor: 'black',
-    borderBottomWidth: 1,
-    width: '95%',
-    marginLeft: '2.5%',
+    paddingTop: 20,
+    paddingBottom:20,
+    borderBottomColor: 'rgba(0,0,0,.15)',
+    borderBottomWidth: 2,
+    marginLeft:'10%'
+
+
   },
   textHeader: {
     fontSize: 24,
@@ -120,4 +122,7 @@ const styles = StyleSheet.create({
   crmToggle: {
     backgroundColor: 'blue',
   },
+  blueText:{
+    color:'blue'
+  }
 });
