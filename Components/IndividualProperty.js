@@ -1,21 +1,15 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Button,
-  KeyboardAvoidingView,
-} from 'react-native';
+import {View, Text, StyleSheet, KeyboardAvoidingView} from 'react-native';
+import {Button} from 'react-native-elements';
 import MapView, {Marker} from 'react-native-maps';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import Axios from 'axios';
 class IndividualProperty extends Component {
   state = {
-    viewInformation: true,
+    viewInformation: false,
     newNoteInput: '',
   };
-
 
   render() {
     let {
@@ -38,16 +32,18 @@ class IndividualProperty extends Component {
             justifyContent: 'space-evenly',
             flex: 1,
           }}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => {
               this.props.viewIndividualToggler();
-
             }}>
-            <Text>X</Text>
-          </TouchableOpacity>
+            <Text style={{color: 'black', fontSize: 36}}>X</Text>
+          </TouchableOpacity> */}
+
           <View style={styles.header}>
             <Button
-              title="information"
+              title="Information"
+              type="clear"
+              titleStyle={{color: 'black', fontSize:14}}
               onPress={() => {
                 this.setState({
                   viewInformation: true,
@@ -56,7 +52,9 @@ class IndividualProperty extends Component {
             />
 
             <Button
-              title="notes"
+              title="Notes"
+              type="clear"
+              titleStyle={{color: 'black', fontSize:14}}
               onPress={() => {
                 this.setState({
                   viewInformation: false,
@@ -64,17 +62,37 @@ class IndividualProperty extends Component {
               }}
             />
           </View>
+          <View style={{flex: 3, width: '95%', marginLeft: '2.5%'}}>
+            <Text style={styles.h1}>{ownerName}</Text>
+            <View style={styles.trackingHolder}>
+              <Button
+                buttonStyle={styles.buttonStyle}
+                titleStyle={{color: 'black', fontSize: 12, fontWeight: '500'}}
+                type="outline"
+                title="start Tracking"
+              />
+              <Button
+                title="Send to CRM"
+                titleStyle={{color: 'black', fontSize: 12, fontWeight: '500'}}
+                buttonStyle={styles.buttonStyle}
+                type="outline"
+              />
+            </View>
 
-          <Text style={styles.h1}>{ownerName}</Text>
-          <View style={styles.trackingHolder}>
-            <Button title="start Tracking" />
-            <Button title="Send to CRM" />
-          </View>
-
-          <View style={styles.addressBox}>
-            <Text style={styles.lighten}>Address</Text>
-            <Text>{address}</Text>
-            <Text>{distance}</Text>
+            <View style={styles.addressBox}>
+              <Text style={styles.lighten}>Address</Text>
+              <View
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'flex-start',
+                  marginTop: '1%',
+                }}>
+                <Text style={{maxWidth: '33%'}}>{address}</Text>
+                <Text style={{color: 'blue'}}>({distance} miles away)</Text>
+              </View>
+            </View>
           </View>
 
           <View style={styles.mapsView}>
@@ -92,25 +110,28 @@ class IndividualProperty extends Component {
                   latitude: +latitude,
                   longitude: +longitude,
                 }}
-
               />
             </MapView>
           </View>
 
-          <View style={styles.contactBox}>
-            <Text style={styles.lighten}>Owner Contact Info</Text>
 
-            <Text>Phone</Text>
-            <Text>Email</Text>
+          <View style={{width:'95%', marginLeft:"2.5%", flex:3}}>
+            <View style={styles.contactBox}>
+              <Text style={styles.lighten}>Owner Contact Info</Text>
+
+              <Text>Phone</Text>
+              <Text>Email</Text>
+            </View>
+
+            <View style={styles.houseDetails}>
+              <Text style={styles.lighten}>HouseDetails</Text>
+              <Text>Desired Price:{price}</Text>
+              <Text>Bedrooms:{bedrooms}</Text>
+              <Text>Bathrooms:{bathrooms}</Text>
+              <Text>Sq Footage</Text>
+            </View>
           </View>
 
-          <View style={styles.houseDetails}>
-            <Text style={styles.lighten}>HouseDetails</Text>
-            <Text>Desired Price:{price}</Text>
-            <Text>Bedrooms:{bedrooms}</Text>
-            <Text>Bathrooms:{bathrooms}</Text>
-            <Text>Sq Footage</Text>
-          </View>
         </View>
       );
     } else {
@@ -119,12 +140,15 @@ class IndividualProperty extends Component {
           <TouchableOpacity
             onPress={() => {
               this.props.viewIndividualToggler();
-            }}>
-            <Text>X</Text>
+            }}
+            style={{position: 'absolute', top: '3%', left: '1%'}}>
+            <Text>{'<'}</Text>
           </TouchableOpacity>
           <View style={styles.header}>
             <Button
-              title="information"
+              title="Information"
+              type="clear"
+              titleStyle={{color: 'black', fontSize:14}}
               onPress={() => {
                 this.setState({
                   viewInformation: true,
@@ -133,7 +157,9 @@ class IndividualProperty extends Component {
             />
 
             <Button
-              title="notes"
+              title="Notes"
+              type="clear"
+              titleStyle={{color: 'black', fontSize:14}}
               onPress={() => {
                 this.setState({
                   viewInformation: false,
@@ -197,29 +223,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    backgroundColor: 'yellow',
-    flex: 2,
+    backgroundColor: 'rgba(0,0,0,.05)',
+    flex: 1,
   },
   h1: {
-    fontSize: 20,
+    fontSize: 36,
     fontWeight: '600',
-    marginLeft:'5%'
   },
   trackingHolder: {
-    flex: 2,
-    borderColor: 'yellow',
+    flex: 1,
+    // borderColor: 'yellow',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
   addressBox: {
-    borderColor: 'red',
-    borderWidth: 2,
-    display: 'flex',
-    flexDirection: 'row',
+    // borderColor: 'red',
+    // borderWidth: 2,
     flex: 1,
-    justifyContent: 'space-evenly',
   },
   contactBox: {
     display: 'flex',
@@ -232,11 +254,16 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   mapsView: {
-    flex: 3,
-    borderColor: 'green',
-    borderWidth: 1,
+    flex: 2,
+    // borderColor: 'green',
+    // borderWidth: 1,
   },
   lighten: {
     opacity: 0.5,
+  },
+  buttonStyle: {
+    borderColor: 'black',
+    paddingLeft: 40,
+    paddingRight: 40,
   },
 });

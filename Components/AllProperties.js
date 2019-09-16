@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    backgroundColor: 'gray',
+    backgroundColor: 'rgba(0,0,0,.05)',
 
   },
 });
