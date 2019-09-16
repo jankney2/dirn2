@@ -43,7 +43,7 @@ class IndividualProperty extends Component {
             <Button
               title="Information"
               type="clear"
-              titleStyle={{color: 'black', fontSize:14}}
+              titleStyle={{color: 'black', fontSize: 14}}
               onPress={() => {
                 this.setState({
                   viewInformation: true,
@@ -54,7 +54,7 @@ class IndividualProperty extends Component {
             <Button
               title="Notes"
               type="clear"
-              titleStyle={{color: 'black', fontSize:14}}
+              titleStyle={{color: 'black', fontSize: 14}}
               onPress={() => {
                 this.setState({
                   viewInformation: false,
@@ -114,8 +114,7 @@ class IndividualProperty extends Component {
             </MapView>
           </View>
 
-
-          <View style={{width:'95%', marginLeft:"2.5%", flex:3}}>
+          <View style={{width: '95%', marginLeft: '2.5%', flex: 3}}>
             <View style={styles.contactBox}>
               <Text style={styles.lighten}>Owner Contact Info</Text>
 
@@ -131,7 +130,6 @@ class IndividualProperty extends Component {
               <Text>Sq Footage</Text>
             </View>
           </View>
-
         </View>
       );
     } else {
@@ -144,11 +142,11 @@ class IndividualProperty extends Component {
             style={{position: 'absolute', top: '3%', left: '1%'}}>
             <Text>{'<'}</Text>
           </TouchableOpacity>
-          <View style={styles.header}>
+          <View style={styles.headerTwo}>
             <Button
               title="Information"
               type="clear"
-              titleStyle={{color: 'black', fontSize:14}}
+              titleStyle={{color: 'black', fontSize: 14}}
               onPress={() => {
                 this.setState({
                   viewInformation: true,
@@ -159,7 +157,7 @@ class IndividualProperty extends Component {
             <Button
               title="Notes"
               type="clear"
-              titleStyle={{color: 'black', fontSize:14}}
+              titleStyle={{color: 'black', fontSize: 14}}
               onPress={() => {
                 this.setState({
                   viewInformation: false,
@@ -174,26 +172,30 @@ class IndividualProperty extends Component {
             <TextInput
               multiline={true}
               placeholder="Add note..."
-              style={{
-                width: '80%',
-                marginLeft: '10%',
-                borderColor: 'black',
-                borderWidth: 1,
-                height: '70%',
-              }}
+              style={
+                {
+                  // width: '80%',
+                  // marginLeft: '10%',
+                  // borderColor: 'black',
+                  // borderWidth: 1,
+                  // height: '70%',
+                }
+              }
               onChangeText={text => {
                 this.setState({
                   newNoteInput: text,
                 });
               }}
             />
-            <Text>
-              Characters Left:{this.state.newNoteInput.length}/1000{' '}
+            <Text style={{textAlign: 'right', color: 'blue'}}>
+              {this.state.newNoteInput.length}/1000{' '}
               {this.props.property.property_id}
             </Text>
 
             <Button
               title="save note"
+              type="clear"
+              titleStyle={{color: 'black'}}
               onPress={() => {
                 Axios.put(
                   `https://dropin.business/properties/addNote/${this.props.property.property_id}`,
@@ -265,5 +267,17 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     paddingLeft: 40,
     paddingRight: 40,
+  },
+  notesView: {
+    width: '95%',
+    marginLeft: '2.5%',
+    display: 'flex',
+  },
+  headerTwo: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,.05)',
   },
 });
