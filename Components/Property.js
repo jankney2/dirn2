@@ -40,7 +40,9 @@ class Property extends Component {
             price:this.props.price, 
             bedrooms:this.props.bedrooms, 
             bathrooms:this.props.bathrooms, 
-            notes:this.props.notes
+            notes:this.props.notes, 
+            latitude: this.props.latitude, 
+            longitude: this.props.longitude
           });
           this.props.viewIndividualToggler()
         }}>
@@ -48,7 +50,7 @@ class Property extends Component {
 
           <Text style={styles.textHeader}>{this.props.owner}</Text>
           <Text style={styles.smallText}>{this.props.address}</Text>
-          <Text style={[styles.smallText, styles.blueText]}>{this.props.distance} miles away</Text>
+          <Text style={[styles.smallText, styles.blueText]}>({this.props.distance} miles away)</Text>
 
           {/* <Button
           title={this.state.tracking ? 'tracking' : 'untracked'}

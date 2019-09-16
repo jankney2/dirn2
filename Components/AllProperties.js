@@ -9,12 +9,18 @@ import {
   TextInput,
 } from 'react-native';
 import axios from 'axios';
+// import Icon from 'react-native-vector-icons/MaterialIcons'
 import {connect} from 'react-redux';
 import Property from './Property';
 import Geolocation from '@react-native-community/geolocation';
 import {SafeAreaView} from 'react-navigation';
 import IndividualProperty from './IndividualProperty';
 import {SearchBar} from 'react-native-elements';
+
+//icons
+
+// const searchBarIcon=<Icon name='search' size={14} color='black'/>
+
 
 class Properties extends Component {
   constructor() {
@@ -48,6 +54,7 @@ class Properties extends Component {
             this.setState({
               userProperties: res.data,
             });
+            console.log('userPRops', this.state.userProperties);
             this.arrayHolder = res.data;
           })
           .catch(err => Alert.alert(err));
@@ -81,31 +88,18 @@ class Properties extends Component {
     if (!this.state.viewIndividual) {
       return (
         <SafeAreaView>
-          {/* 
-  <SearchBar name= 'inputVal'
-  
-    // value={this.state.inputVal}
-     lightTheme 
-     inputStyle={{
-       color:'red'
-     }}
-     placeholder='Owner Name/Address'
-     containerStyle={{
-    backgroundColor:'white'
-  }} 
-  inputContainerStyle={{backgroundColor:'white'}}
-  
-  /> */}
-          <TextInput
-            placeholder="Search for owner Name/Address"
-            style={styles.inputStyles}
-            onChangeText={this.inputChange}
-          />
+          <View style={styles.headerNav}>
+            <Text>Full List A=Z</Text>
+            <Text>Tracking</Text>
 
+            <TextInput
+              placeholder="Search for owner Name/Address"
+              style={styles.inputStyles}
+              onChangeText={this.inputChange}
+            />
+          </View>
           <ScrollView>
             <View>
-            
-
               <FlatList
                 data={this.state.userProperties}
                 renderItem={({item}) => {
@@ -128,6 +122,8 @@ class Properties extends Component {
                       searchVal={this.state.inputVal}
                       owningUser={this.props.activeUser.user_id}
                       updateUserProperties={this.updateUserProperties}
+                      latitude={item.latitude}
+                      longitude={item.longitude}
                       address={`${item.street}, ${item.city}`}
                       tracking={item.is_tracked}
                       crmStatus={item.send_to_crm}
@@ -160,8 +156,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  inputStyles: {
-    padding: 20,
+  inputStyles: {},
+  headerNav: {
+    display: 'flex',
+    height:'12.5%',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    backgroundColor: 'gray',
+
   },
 });
 

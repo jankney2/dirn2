@@ -7,7 +7,7 @@ import {
   Button,
   KeyboardAvoidingView,
 } from 'react-native';
-import MapView from 'react-native-maps'
+import MapView, {Marker} from 'react-native-maps';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import Axios from 'axios';
 class IndividualProperty extends Component {
@@ -16,11 +16,20 @@ class IndividualProperty extends Component {
     newNoteInput: '',
   };
 
-  componentDidMount() {
-    console.log(this.props.property);
-  }
+
   render() {
-    let {address,ownerName, is_tracked, send_to_crm, bedrooms, bathrooms, price, distance} = this.props.property;
+    let {
+      address,
+      latitude,
+      longitude,
+      ownerName,
+      is_tracked,
+      send_to_crm,
+      bedrooms,
+      bathrooms,
+      price,
+      distance,
+    } = this.props.property;
     if (this.state.viewInformation) {
       return (
         <View
@@ -32,7 +41,7 @@ class IndividualProperty extends Component {
           <TouchableOpacity
             onPress={() => {
               this.props.viewIndividualToggler();
-              console.log('fweoaijfowaeijfo');
+
             }}>
             <Text>X</Text>
           </TouchableOpacity>
@@ -69,15 +78,23 @@ class IndividualProperty extends Component {
           </View>
 
           <View style={styles.mapsView}>
-<MapView 
-style={{flex:1}}
-initialRegion={{
-  latitude:40.2222,
-  longitude:-111.3333,
-  latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-}}
-/>
+            <MapView
+              style={{flex: 1}}
+              initialRegion={{
+                latitude: +latitude,
+                longitude: +longitude,
+                latitudeDelta: 0.0522,
+                longitudeDelta: 0.0121,
+              }}>
+              <Marker
+                title={`${address}`}
+                coordinate={{
+                  latitude: +latitude,
+                  longitude: +longitude,
+                }}
+
+              />
+            </MapView>
           </View>
 
           <View style={styles.contactBox}>
@@ -102,7 +119,6 @@ initialRegion={{
           <TouchableOpacity
             onPress={() => {
               this.props.viewIndividualToggler();
-
             }}>
             <Text>X</Text>
           </TouchableOpacity>
@@ -178,16 +194,16 @@ export default connect(
 const styles = StyleSheet.create({
   header: {
     display: 'flex',
-
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: 'yellow',
-    flex: 1,
+    flex: 2,
   },
   h1: {
     fontSize: 20,
     fontWeight: '600',
+    marginLeft:'5%'
   },
   trackingHolder: {
     flex: 2,
