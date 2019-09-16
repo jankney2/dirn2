@@ -43,7 +43,7 @@ class Login extends Component {
       })
       .then(res => {
         this.props.setUser(res.data.user);
-
+        
         this.setState({
           phoneVal: '',
           passVal: '',

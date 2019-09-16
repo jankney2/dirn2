@@ -89,9 +89,6 @@ class Properties extends Component {
       return (
         <SafeAreaView>
           <View style={styles.headerNav}>
-            <Text>Full List A=Z</Text>
-            <Text>Tracking</Text>
-
             <TextInput
               placeholder="Search for owner Name/Address"
               style={styles.inputStyles}

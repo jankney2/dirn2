@@ -7,7 +7,7 @@ import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import Axios from 'axios';
 class IndividualProperty extends Component {
   state = {
-    viewInformation: false,
+    viewInformation: true,
     newNoteInput: '',
   };
 
@@ -272,6 +272,7 @@ const styles = StyleSheet.create({
     width: '95%',
     marginLeft: '2.5%',
     display: 'flex',
+
   },
   headerTwo: {
     display: 'flex',
@@ -279,5 +280,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: 'rgba(0,0,0,.05)',
+
   },
 });

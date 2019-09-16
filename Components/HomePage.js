@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, TextInput} from 'react-native';
 import {createStackNavigator} from 'react-navigation';
 import IndividualProperty from './IndividualProperty';
 import Adder from './Adder';
+import {updateDisplayProperty} from '../redux/actionsTypes'
 import Geolocation from '@react-native-community/geolocation';
 import CrmList from './CrmList';
 import updatePropertyDistances from '../redux/actionsTypes';
@@ -36,11 +37,29 @@ class HomePage extends Component {
           longitude: this.state.longitude,
         },
       ).then(res => {
+        let reduxSplice=res.data[0]
+        this.props.updateDisplayProperty({
+          address: reduxSplice.address,
+          ownerName: reduxSplice.owner,
+          distance: reduxSplice.distance,
+          price:reduxSplice.price, 
+          bedrooms:reduxSplice.bedrooms, 
+          bathrooms:reduxSplice.bathrooms, 
+          notes:reduxSplice.notes, 
+          latitude: reduxSplice.latitude, 
+          longitude: reduxSplice.longitude
+        })
+        
         let spliced = res.data
           .sort(function(a, b) {
             return +a.distance - +b.distance;
           })
           .splice(0, 3);
+
+
+
+          console.log('redux', reduxSplice)
+         
 
         this.setState({
           userProperties: spliced,
@@ -51,12 +70,24 @@ class HomePage extends Component {
 
   componentDidMount() {
     this.propertyFinder();
-    console.log(this.props.activeUser, 'user');
+    console.log(this.props.property, 'active property');
+  }
+
+  viewIndividualToggler=()=>{
+console.log('fowaijfoewaij')
   }
 
   render() {
     return (
       <View style={styles.hello}>
+                  <View style={styles.headerNav}>
+            <Text>Below are the 3 properties that are closest to you. Click on one for details!</Text>
+          </View>
+<View style={styles.individualWrapper}>
+
+          <IndividualProperty />
+</View>
+
 
         <FlatList
         refreshing={this.state.refreshing}
@@ -98,26 +129,30 @@ class HomePage extends Component {
           }}
           keyExtractor={item => item.property_id.toString()}
         />
+
+
+
       </View>
     );
   }
 }
 
 const mapStateToProps = state => {
-  return {activeUser: state.user};
+  return {activeUser: state.user, 
+  property:state.displayProperty};
 };
-// const mapDispatchToProps={
-// updatePropertyDistances
-// }
+const mapDispatchToProps={
+updateDisplayProperty
+}
 
-export default connect(mapStateToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
 
 const styles = StyleSheet.create({
   hello: {
     // height:,
     // width:350,
     // padding: 10,
-    flex: 1,
+    // flex: 1,
     // justifyContent: 'space-around',
     // alignItems: 'center',
   },
@@ -128,4 +163,23 @@ const styles = StyleSheet.create({
   button: {
     width: 200,
   },
+
+  headerNav:{
+    display: 'flex',
+    height:'12.5%',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,.05)',
+
+  }, 
+  individualWrapper: {
+    zIndex:100,
+// flex:1,
+    height:'100%',
+    position:'absolute',
+    top:0,
+    left:'40%', 
+    backgroundColor:'rgba(0,0,0,.5)'
+  }
 });
