@@ -1,26 +1,21 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TextInput} from 'react-native';
-import {createStackNavigator} from 'react-navigation';
+import {Text, View, StyleSheet, TextInput, SafeAreaView, ScrollView} from 'react-native';
 import IndividualProperty from './IndividualProperty';
-import Adder from './Adder';
 import {updateDisplayProperty} from '../redux/actionsTypes';
 import Geolocation from '@react-native-community/geolocation';
-import CrmList from './CrmList';
-import updatePropertyDistances from '../redux/actionsTypes';
 import Property from './Property';
-import {Button} from 'react-native-elements';
-
 import {connect} from 'react-redux';
-import Settings from './Settings';
-import Properties from './AllProperties';
 import Axios from 'axios';
 import {FlatList} from 'react-native-gesture-handler';
+
+
 class HomePage extends Component {
   state = {
     latitude: '',
     longitude: '',
     user: {},
     refreshing: false,
+    viewDetails: false,
   };
 
   propertyFinder = () => {
@@ -67,66 +62,136 @@ class HomePage extends Component {
 
   componentDidMount() {
     this.propertyFinder();
-    console.log(this.props.property, 'property')
+    console.log(this.props.property, 'property');
   }
 
   viewIndividualToggler = () => {
-    console.log('fowaijfoewaij');
+this.setState({
+  viewDetails:!this.state.viewDetails
+})
   };
 
   render() {
     return (
-      <View style={styles.hello}>
-        <View style={styles.headerNav}>
-          <Text>
-            Below are the 3 properties that are closest to you. Click on one for
-            details!
-          </Text>
-        </View>
-        {/* <View style={styles.individualWrapper}>
-          <IndividualProperty />
-        </View> */}
-        <Text>Seller {this.props.property.address}</Text>
-        <FlatList
-          refreshing={this.state.refreshing}
-          onRefresh={() => {
-            this.setState({
-              refreshing: true,
-            });
-            this.propertyFinder();
-          }}
-          data={this.state.userProperties}
-          renderItem={({item}) => {
-            return (
-              <Property
-                viewIndividualToggler={() => {
-                  this.viewIndividualToggler();
-                }}
-                updatePropertyList={newData => {
-                  this.setState({
-                    userProperties: newData,
-                  });
-                }}
-                distance={item.distance}
-                notes={item.user_notes}
-                price={item.price}
-                bedrooms={item.bedrooms}
-                bathrooms={item.bathrooms}
-                owner={item.seller}
-                searchVal={this.state.inputVal}
-                owningUser={this.props.activeUser.user_id}
-                updateUserProperties={this.updateUserProperties}
-                address={`${item.street}, ${item.city}`}
-                tracking={item.is_tracked}
-                crmStatus={item.send_to_crm}
-                deleteId={item.property_id}
-                style={{textAlign: 'center'}}
-              />
-            );
-          }}
-          keyExtractor={item => item.property_id.toString()}
+      // <View style={styles.hello}>
+      //   <View style={styles.headerNav}>
+      //     <Text>
+      //       Below are the 3 properties that are closest to you. Click on one for
+      //       details!
+      //     </Text>
+      //   </View>
+
+
+      //     <View style={this.state.viewDetails?styles.individualWrapper:styles.hide}>
+      //       <IndividualProperty
+      //         viewIndividualToggler={this.viewIndividualToggler}
+      //       />
+      //     </View>
+
+
+      //   <Text>Seller {this.props.property.address}</Text>
+      //   <FlatList
+      //     refreshing={this.state.refreshing}
+      //     onRefresh={() => {
+      //       this.setState({
+      //         refreshing: true,
+      //       });
+      //       this.propertyFinder();
+      //     }}
+      //     data={this.state.userProperties}
+      //     renderItem={({item}) => {
+      //       return (
+      //         <Property
+      //           viewIndividualToggler={() => {
+      //             this.viewIndividualToggler();
+      //           }}
+      //           updatePropertyList={newData => {
+      //             this.setState({
+      //               userProperties: newData,
+      //             });
+      //           }}
+      //           distance={item.distance}
+      //           notes={item.user_notes}
+      //           price={item.price}
+      //           bedrooms={item.bedrooms}
+      //           bathrooms={item.bathrooms}
+      //           owner={item.seller}
+      //           searchVal={this.state.inputVal}
+      //           owningUser={this.props.activeUser.user_id}
+      //           updateUserProperties={this.updateUserProperties}
+      //           address={`${item.street}, ${item.city}`}
+      //           tracking={item.is_tracked}
+      //           crmStatus={item.send_to_crm}
+      //           deleteId={item.property_id}
+      //           style={{textAlign: 'center'}}
+      //         />
+      //       );
+      //     }}
+      //     keyExtractor={item => item.property_id.toString()}
+      //   />
+      // </View>
+
+
+
+      //woof
+
+
+      <SafeAreaView>
+      <View style={styles.headerNav}>
+        <TextInput
+          placeholder="Search for owner Name/Address"
+          style={styles.inputStyles}
+          onChangeText={this.inputChange}
         />
       </View>
+      <ScrollView>
+        <View>
+          <FlatList
+            data={this.state.userProperties}
+            renderItem={({item}) => {
+              return (
+                <Property
+                  viewIndividualToggler={() => {
+                    this.viewIndividualToggler();
+                  }}
+                  updatePropertyList={newData => {
+                    this.setState({
+                      userProperties: newData,
+                    });
+                  }}
+                  distance={item.distance}
+                  notes={item.user_notes}
+                  price={item.price}
+                  bedrooms={item.bedrooms}
+                  bathrooms={item.bathrooms}
+                  owner={item.seller}
+                  searchVal={this.state.inputVal}
+                  owningUser={this.props.activeUser.user_id}
+                  updateUserProperties={this.updateUserProperties}
+                  latitude={item.latitude}
+                  longitude={item.longitude}
+                  address={`${item.street}, ${item.city}`}
+                  tracking={item.is_tracked}
+                  crmStatus={item.send_to_crm}
+                  deleteId={item.property_id}
+                  style={{textAlign: 'center'}}
+                />
+              );
+            }}
+            keyExtractor={item => item.property_id.toString()}
+          />
+        </View>
+      </ScrollView>
+
+<View style={styles.individualWrapper}>
+
+      <IndividualProperty
+          viewIndividualToggler={() => {
+            this.viewIndividualToggler();
+          }}
+          />
+          </View>
+    </SafeAreaView>
     );
   }
 }
@@ -177,4 +242,7 @@ const styles = StyleSheet.create({
     left: '40%',
     backgroundColor: 'rgba(0,0,0,.5)',
   },
+  hide: {
+    display:"none"
+  }
 });
