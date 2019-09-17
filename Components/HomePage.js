@@ -3,7 +3,7 @@ import {Text, View, StyleSheet, TextInput} from 'react-native';
 import {createStackNavigator} from 'react-navigation';
 import IndividualProperty from './IndividualProperty';
 import Adder from './Adder';
-import {updateDisplayProperty} from '../redux/actionsTypes'
+import {updateDisplayProperty} from '../redux/actionsTypes';
 import Geolocation from '@react-native-community/geolocation';
 import CrmList from './CrmList';
 import updatePropertyDistances from '../redux/actionsTypes';
@@ -20,7 +20,7 @@ class HomePage extends Component {
     latitude: '',
     longitude: '',
     user: {},
-    refreshing:false
+    refreshing: false,
   };
 
   propertyFinder = () => {
@@ -29,7 +29,7 @@ class HomePage extends Component {
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
       });
-      console.log(this.state.latitude, this.state.longitude, 'coords')
+      console.log(this.state.latitude, this.state.longitude, 'coords');
       Axios.post(
         `https://dropin.business/api/userProperties/calcDistance/${this.props.activeUser.user_id}`,
         {
@@ -37,29 +37,26 @@ class HomePage extends Component {
           longitude: this.state.longitude,
         },
       ).then(res => {
-        let reduxSplice=res.data[0]
+        let reduxSplice = res.data[0];
         this.props.updateDisplayProperty({
           address: reduxSplice.address,
           ownerName: reduxSplice.owner,
           distance: reduxSplice.distance,
-          price:reduxSplice.price, 
-          bedrooms:reduxSplice.bedrooms, 
-          bathrooms:reduxSplice.bathrooms, 
-          notes:reduxSplice.notes, 
-          latitude: reduxSplice.latitude, 
-          longitude: reduxSplice.longitude
-        })
-        
+          price: reduxSplice.price,
+          bedrooms: reduxSplice.bedrooms,
+          bathrooms: reduxSplice.bathrooms,
+          notes: reduxSplice.notes,
+          latitude: reduxSplice.latitude,
+          longitude: reduxSplice.longitude,
+        });
+
         let spliced = res.data
           .sort(function(a, b) {
             return +a.distance - +b.distance;
           })
           .splice(0, 3);
 
-
-
-          console.log('redux', reduxSplice)
-         
+        console.log('redux', reduxSplice);
 
         this.setState({
           userProperties: spliced,
@@ -70,34 +67,34 @@ class HomePage extends Component {
 
   componentDidMount() {
     this.propertyFinder();
-    console.log(this.props.property, 'active property');
+    console.log(this.props.property, 'property')
   }
 
-  viewIndividualToggler=()=>{
-console.log('fowaijfoewaij')
-  }
+  viewIndividualToggler = () => {
+    console.log('fowaijfoewaij');
+  };
 
   render() {
     return (
       <View style={styles.hello}>
-                  <View style={styles.headerNav}>
-            <Text>Below are the 3 properties that are closest to you. Click on one for details!</Text>
-          </View>
-<View style={styles.individualWrapper}>
-
+        <View style={styles.headerNav}>
+          <Text>
+            Below are the 3 properties that are closest to you. Click on one for
+            details!
+          </Text>
+        </View>
+        {/* <View style={styles.individualWrapper}>
           <IndividualProperty />
-</View>
-
-
+        </View> */}
+        <Text>Seller {this.props.property.address}</Text>
         <FlatList
-        refreshing={this.state.refreshing}
-        onRefresh={()=>{
-          this.setState({
-            refreshing:true
-          })
-          this.propertyFinder()
-      
-        }}
+          refreshing={this.state.refreshing}
+          onRefresh={() => {
+            this.setState({
+              refreshing: true,
+            });
+            this.propertyFinder();
+          }}
           data={this.state.userProperties}
           renderItem={({item}) => {
             return (
@@ -129,23 +126,22 @@ console.log('fowaijfoewaij')
           }}
           keyExtractor={item => item.property_id.toString()}
         />
-
-
-
       </View>
     );
   }
 }
 
 const mapStateToProps = state => {
-  return {activeUser: state.user, 
-  property:state.displayProperty};
+  return {activeUser: state.user, property: state.displayProperty};
 };
-const mapDispatchToProps={
-updateDisplayProperty
-}
+const mapDispatchToProps = {
+  updateDisplayProperty,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(HomePage);
 
 const styles = StyleSheet.create({
   hello: {
@@ -164,22 +160,21 @@ const styles = StyleSheet.create({
     width: 200,
   },
 
-  headerNav:{
+  headerNav: {
     display: 'flex',
-    height:'12.5%',
+    height: '12.5%',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: 'rgba(0,0,0,.05)',
-
-  }, 
+  },
   individualWrapper: {
-    zIndex:100,
-// flex:1,
-    height:'100%',
-    position:'absolute',
-    top:0,
-    left:'40%', 
-    backgroundColor:'rgba(0,0,0,.5)'
-  }
+    zIndex: 100,
+    // flex:1,
+    height: '100%',
+    position: 'absolute',
+    top: 0,
+    left: '40%',
+    backgroundColor: 'rgba(0,0,0,.5)',
+  },
 });

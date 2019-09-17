@@ -3,9 +3,7 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {updateDisplayProperty} from '../redux/actionsTypes';
 import {connect} from 'react-redux';
 import axios from 'axios';
-import {createStackNavigator, createAppContainer} from 'react-navigation';
 
-import IndividualProperty from './IndividualProperty';
 
 
 class Property extends Component {
