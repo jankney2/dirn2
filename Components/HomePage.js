@@ -1,5 +1,12 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TextInput, SafeAreaView, ScrollView} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TextInput,
+  SafeAreaView,
+  ScrollView,
+} from 'react-native';
 import IndividualProperty from './IndividualProperty';
 import {updateDisplayProperty} from '../redux/actionsTypes';
 import Geolocation from '@react-native-community/geolocation';
@@ -7,7 +14,6 @@ import Property from './Property';
 import {connect} from 'react-redux';
 import Axios from 'axios';
 import {FlatList} from 'react-native-gesture-handler';
-
 
 class HomePage extends Component {
   state = {
@@ -66,9 +72,9 @@ class HomePage extends Component {
   }
 
   viewIndividualToggler = () => {
-this.setState({
-  viewDetails:!this.state.viewDetails
-})
+    this.setState({
+      viewDetails: !this.state.viewDetails,
+    });
   };
 
   render() {
@@ -81,13 +87,11 @@ this.setState({
       //     </Text>
       //   </View>
 
-
       //     <View style={this.state.viewDetails?styles.individualWrapper:styles.hide}>
       //       <IndividualProperty
       //         viewIndividualToggler={this.viewIndividualToggler}
       //       />
       //     </View>
-
 
       //   <Text>Seller {this.props.property.address}</Text>
       //   <FlatList
@@ -131,67 +135,63 @@ this.setState({
       //   />
       // </View>
 
-
-
       //woof
 
-
-      <SafeAreaView>
-      <View style={styles.headerNav}>
-        <TextInput
-          placeholder="Search for owner Name/Address"
-          style={styles.inputStyles}
-          onChangeText={this.inputChange}
-        />
-      </View>
-      <ScrollView>
-        <View>
-          <FlatList
-            data={this.state.userProperties}
-            renderItem={({item}) => {
-              return (
-                <Property
-                  viewIndividualToggler={() => {
-                    this.viewIndividualToggler();
-                  }}
-                  updatePropertyList={newData => {
-                    this.setState({
-                      userProperties: newData,
-                    });
-                  }}
-                  distance={item.distance}
-                  notes={item.user_notes}
-                  price={item.price}
-                  bedrooms={item.bedrooms}
-                  bathrooms={item.bathrooms}
-                  owner={item.seller}
-                  searchVal={this.state.inputVal}
-                  owningUser={this.props.activeUser.user_id}
-                  updateUserProperties={this.updateUserProperties}
-                  latitude={item.latitude}
-                  longitude={item.longitude}
-                  address={`${item.street}, ${item.city}`}
-                  tracking={item.is_tracked}
-                  crmStatus={item.send_to_crm}
-                  deleteId={item.property_id}
-                  style={{textAlign: 'center'}}
-                />
-              );
-            }}
-            keyExtractor={item => item.property_id.toString()}
+      <SafeAreaView style={styles.hello}>
+        <View >
+          <TextInput
+            placeholder="Search for owner Name/Address"
+            style={styles.inputStyles}
+            onChangeText={this.inputChange}
           />
         </View>
-      </ScrollView>
-
-<View style={styles.individualWrapper}>
-
-      <IndividualProperty
-          viewIndividualToggler={() => {
-            this.viewIndividualToggler();
-          }}
-          />
+        <ScrollView>
+          <View>
+            <FlatList
+              data={this.state.userProperties}
+              renderItem={({item}) => {
+                return (
+                  <Property
+                    viewIndividualToggler={() => {
+                      this.viewIndividualToggler();
+                    }}
+                    updatePropertyList={newData => {
+                      this.setState({
+                        userProperties: newData,
+                      });
+                    }}
+                    distance={item.distance}
+                    notes={item.user_notes}
+                    price={item.price}
+                    bedrooms={item.bedrooms}
+                    bathrooms={item.bathrooms}
+                    owner={item.seller}
+                    searchVal={this.state.inputVal}
+                    owningUser={this.props.activeUser.user_id}
+                    updateUserProperties={this.updateUserProperties}
+                    latitude={item.latitude}
+                    longitude={item.longitude}
+                    address={`${item.street}, ${item.city}`}
+                    tracking={item.is_tracked}
+                    crmStatus={item.send_to_crm}
+                    deleteId={item.property_id}
+                    style={{textAlign: 'center'}}
+                  />
+                );
+              }}
+              keyExtractor={item => item.property_id.toString()}
+            />
           </View>
-    </SafeAreaView>
+        </ScrollView>
+
+        <View style={styles.individualWrapper}>
+          <IndividualProperty
+            viewIndividualToggler={() => {
+              this.viewIndividualToggler();
+            }}
+          />
+        </View>
+      </SafeAreaView>
     );
   }
 }
@@ -243,6 +243,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,.5)',
   },
   hide: {
-    display:"none"
-  }
+    display: 'none',
+  },
 });
