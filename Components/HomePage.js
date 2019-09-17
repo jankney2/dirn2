@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     // height:,
     // width:350,
     // padding: 10,
-    // flex: 1,
+    flex: 1,
     // justifyContent: 'space-around',
     // alignItems: 'center',
   },
