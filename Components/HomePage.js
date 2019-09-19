@@ -6,6 +6,8 @@ import {
   TextInput,
   SafeAreaView,
   ScrollView,
+  Animated, 
+  Dimensions
 } from 'react-native';
 import IndividualProperty from './IndividualProperty';
 import {updateDisplayProperty} from '../redux/actionsTypes';
@@ -15,6 +17,9 @@ import {connect} from 'react-redux';
 import Axios from 'axios';
 import {FlatList} from 'react-native-gesture-handler';
 
+const screenWidth=Math.round(Dimensions.get('window').width)
+
+
 class HomePage extends Component {
   state = {
     latitude: '',
@@ -22,6 +27,7 @@ class HomePage extends Component {
     user: {},
     refreshing: false,
     viewDetails: false,
+    positionX:screenWidth
   };
 
   propertyFinder = () => {
@@ -79,62 +85,7 @@ class HomePage extends Component {
 
   render() {
     return (
-      // <View style={styles.hello}>
-      //   <View style={styles.headerNav}>
-      //     <Text>
-      //       Below are the 3 properties that are closest to you. Click on one for
-      //       details!
-      //     </Text>
-      //   </View>
-
-      //     <View style={this.state.viewDetails?styles.individualWrapper:styles.hide}>
-      //       <IndividualProperty
-      //         viewIndividualToggler={this.viewIndividualToggler}
-      //       />
-      //     </View>
-
-      //   <Text>Seller {this.props.property.address}</Text>
-      //   <FlatList
-      //     refreshing={this.state.refreshing}
-      //     onRefresh={() => {
-      //       this.setState({
-      //         refreshing: true,
-      //       });
-      //       this.propertyFinder();
-      //     }}
-      //     data={this.state.userProperties}
-      //     renderItem={({item}) => {
-      //       return (
-      //         <Property
-      //           viewIndividualToggler={() => {
-      //             this.viewIndividualToggler();
-      //           }}
-      //           updatePropertyList={newData => {
-      //             this.setState({
-      //               userProperties: newData,
-      //             });
-      //           }}
-      //           distance={item.distance}
-      //           notes={item.user_notes}
-      //           price={item.price}
-      //           bedrooms={item.bedrooms}
-      //           bathrooms={item.bathrooms}
-      //           owner={item.seller}
-      //           searchVal={this.state.inputVal}
-      //           owningUser={this.props.activeUser.user_id}
-      //           updateUserProperties={this.updateUserProperties}
-      //           address={`${item.street}, ${item.city}`}
-      //           tracking={item.is_tracked}
-      //           crmStatus={item.send_to_crm}
-      //           deleteId={item.property_id}
-      //           style={{textAlign: 'center'}}
-      //         />
-      //       );
-      //     }}
-      //     keyExtractor={item => item.property_id.toString()}
-      //   />
-      // </View>
-
+     
       //woof
 
       <SafeAreaView style={styles.hello}>
@@ -239,7 +190,7 @@ const styles = StyleSheet.create({
     height: '100%',
     position: 'absolute',
     top: 0,
-    left: '40%',
+    left: screenWidth,
     backgroundColor: 'rgba(0,0,0,.5)',
   },
   hide: {
