@@ -11,10 +11,10 @@ class CrmList extends Component {
     userProperties: [],
   };
   componentDidMount() {
-console.log(this.props.activeUser.user_id)
+  console.log(this.props.activeUser.user_id)
     axios
       .get(
-        `https://dropin.business/api/userProperties/${this.props.activeUser.user_id}`,
+        `https://dropin.business/api/userProperties/${this.props.activeUser.user_id}`
       )
       .then(res => {
         console.log('CRM res', res.data)
@@ -36,7 +36,7 @@ console.log(this.props.activeUser.user_id)
       return (
         <View>
           <Text>CRM List</Text>
-          <Button title="send now!"/>
+          <Button title="send now!" color='red'/>
           <FlatList
             data={this.state.userProperties}
             renderItem={({item}) => {
