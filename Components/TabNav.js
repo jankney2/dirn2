@@ -4,6 +4,7 @@ import HomePage from './HomePage'
 import 
 AllProperties from './AllProperties'
 import CrmList from './CrmList'
+import Adder from './Adder'
 const small = createBottomTabNavigator(
     {
       settings: {
@@ -15,7 +16,7 @@ const small = createBottomTabNavigator(
       homePage: {
         screen: HomePage,
         navigationOptions: {
-          tabBarLabel: 'Home',
+          tabBarLabel: 'Nearby',
         },
       },
       properties: {
@@ -27,9 +28,15 @@ const small = createBottomTabNavigator(
       CRM: {
         screen: CrmList,
         navigationOptions: {
-          tabBarLabel: 'CRM List',
+          tabBarLabel: 'Export List',
         },
       },
+      adder: {
+        screen:Adder, 
+        navigationOptions:{
+          tabBarLabel:'Add'
+        }
+      }
     },
     {
       initialRouteName: 'homePage',

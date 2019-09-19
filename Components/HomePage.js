@@ -89,11 +89,7 @@ class HomePage extends Component {
 
         <SafeAreaView style={styles.hello}>
           <View>
-            <TextInput
-              placeholder="Search for owner Name/Address"
-              style={styles.inputStyles}
-              onChangeText={this.inputChange}
-            />
+          <Text styles={styles.headerText}>Below are the 3 leads that are closest to you! Tap one for details.</Text>
           </View>
 
           <ScrollView>
@@ -199,4 +195,8 @@ const styles = StyleSheet.create({
   hide: {
     display: 'none',
   },
+  headerText: {
+    textAlign:'center', 
+    
+  }
 });

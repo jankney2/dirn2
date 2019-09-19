@@ -4,6 +4,7 @@ import {
   Text,
   StyleSheet,
   ScrollView,
+  Dimensions,
   FlatList,
   Alert,
   TextInput,
@@ -156,11 +157,12 @@ const styles = StyleSheet.create({
   inputStyles: {},
   headerNav: {
     display: 'flex',
-    height:'12.5%',
+    height:Math.round(Dimensions.get('window').height)*.1,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: 'rgba(0,0,0,.05)',
+
 
   },
 });

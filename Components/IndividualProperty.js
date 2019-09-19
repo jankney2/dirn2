@@ -69,7 +69,7 @@ class IndividualProperty extends Component {
                 buttonStyle={styles.buttonStyle}
                 titleStyle={{color: 'black', fontSize: 12, fontWeight: '500'}}
                 type="outline"
-                title="start Tracking"
+                title="Delete Property"
               />
               <Button
                 title="Send to CRM"
@@ -118,8 +118,8 @@ class IndividualProperty extends Component {
             <View style={styles.contactBox}>
               <Text style={styles.lighten}>Owner Contact Info</Text>
 
-              <Text>Phone</Text>
-              <Text>Email</Text>
+              <Text>Phone:</Text>
+              <Text>Email:</Text>
             </View>
 
             <View style={styles.houseDetails}>
@@ -127,7 +127,7 @@ class IndividualProperty extends Component {
               <Text>Desired Price:{price}</Text>
               <Text>Bedrooms:{bedrooms}</Text>
               <Text>Bathrooms:{bathrooms}</Text>
-              <Text>Sq Footage</Text>
+
             </View>
           </View>
         </View>
