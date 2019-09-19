@@ -75,7 +75,9 @@ class IndividualProperty extends Component {
             <Text style={styles.h1}>{ownerName}</Text>
             <View style={styles.trackingHolder}>
               <Button
-                buttonStyle={styles.buttonStyle}
+                buttonStyle={[styles.buttonStyle, {
+                  backgroundColor:'red'
+                }]}
                 titleStyle={{color: 'black', fontSize: 12, fontWeight: '500'}}
                 type="outline"
                 title="Delete Property"
@@ -83,7 +85,9 @@ class IndividualProperty extends Component {
               <Button
                 title="Send to CRM"
                 titleStyle={{color: 'black', fontSize: 12, fontWeight: '500'}}
-                buttonStyle={styles.buttonStyle}
+                buttonStyle={[styles.buttonStyle, {
+                  backgroundColor:'red'
+                }]}
                 type="outline"
               />
             </View>
@@ -239,6 +243,7 @@ const styles = StyleSheet.create({
   h1: {
     fontSize: 36,
     fontWeight: '600',
+    marginTop:10
   },
   trackingHolder: {
     flex: 1,

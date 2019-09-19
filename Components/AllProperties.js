@@ -76,7 +76,7 @@ class Properties extends Component {
     const newData = this.arrayHolder.filter(el => {
       return (
         el.street.toLowerCase().indexOf(text.toLowerCase()) > -1 ||
-        el.city.toLowerCase().indexOf(text.toLowerCase()) > -1
+        el.city.toLowerCase().indexOf(text.toLowerCase()) > -1 || el.seller.toLowerCase().indexOf(text.toLowerCase())>-1
       );
     });
 
@@ -91,7 +91,7 @@ class Properties extends Component {
         <SafeAreaView>
           <View style={styles.headerNav}>
             <TextInput
-              placeholder="Search for owner Name/Address"
+              placeholder="Search for Owner/Address/City"
               style={styles.inputStyles}
               onChangeText={this.inputChange}
             />
