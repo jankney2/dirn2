@@ -6,8 +6,9 @@ import {
   TextInput,
   SafeAreaView,
   ScrollView,
-  Animated, 
-  Dimensions
+  Button,
+  Animated,
+  Dimensions,
 } from 'react-native';
 import IndividualProperty from './IndividualProperty';
 import {updateDisplayProperty} from '../redux/actionsTypes';
@@ -17,8 +18,33 @@ import {connect} from 'react-redux';
 import Axios from 'axios';
 import {FlatList} from 'react-native-gesture-handler';
 
-const screenWidth=Math.round(Dimensions.get('window').width)
+const screenWidth = Math.round(Dimensions.get('window').width);
 
+class Animations extends Component {
+  state = {
+    positionX: new Animated.Value(screenWidth),
+  };
+  componentDidMount() {
+    Animated.timing(this.state.positionX, {
+      toValue: 0,
+      duration: 10000,
+    }).start();
+    
+  }
+  
+
+
+
+  render() {
+    return <Animated.View
+
+    style={{
+      ...this.props.style,
+      position:'relative', 
+      left:this.state.positionX, 
+    }}>{this.props.children}</Animated.View>;
+  }
+}
 
 class HomePage extends Component {
   state = {
@@ -27,8 +53,15 @@ class HomePage extends Component {
     user: {},
     refreshing: false,
     viewDetails: false,
-    positionX:screenWidth
+    positionX: new Animated.Value(screenWidth),
   };
+
+  slideIn=()=>{
+    Animated.timing(this.state.positionX, {
+      toValue: 0,
+      duration: 10000,
+    }).start();
+  }
 
   propertyFinder = () => {
     Geolocation.getCurrentPosition(position => {
@@ -85,19 +118,20 @@ class HomePage extends Component {
 
   render() {
     return (
-     
       //woof
 
       <SafeAreaView style={styles.hello}>
-        <View >
+        <View>
           <TextInput
             placeholder="Search for owner Name/Address"
             style={styles.inputStyles}
             onChangeText={this.inputChange}
           />
         </View>
+
         <ScrollView>
           <View>
+
             <FlatList
               data={this.state.userProperties}
               renderItem={({item}) => {
@@ -133,15 +167,16 @@ class HomePage extends Component {
               keyExtractor={item => item.property_id.toString()}
             />
           </View>
+
         </ScrollView>
 
-        <View style={styles.individualWrapper}>
+        <Animations style={styles.individualWrapper}>
           <IndividualProperty
             viewIndividualToggler={() => {
               this.viewIndividualToggler();
             }}
           />
-        </View>
+        </Animations>
       </SafeAreaView>
     );
   }
@@ -191,7 +226,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: screenWidth,
-    backgroundColor: 'rgba(0,0,0,.5)',
+    backgroundColor: 'white',
   },
   hide: {
     display: 'none',
