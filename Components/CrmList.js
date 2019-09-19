@@ -11,12 +11,13 @@ class CrmList extends Component {
     userProperties: [],
   };
   componentDidMount() {
-
+console.log(this.props.activeUser.user_id)
     axios
       .get(
         `https://dropin.business/api/userProperties/${this.props.activeUser.user_id}`,
       )
       .then(res => {
+        console.log('CRM res', res.data)
         this.setState({
           userProperties: res.data,
         });
