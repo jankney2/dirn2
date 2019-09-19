@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {View, Text, StyleSheet, KeyboardAvoidingView} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  KeyboardAvoidingView,
+} from 'react-native';
 import {Button} from 'react-native-elements';
 import MapView, {Marker} from 'react-native-maps';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
@@ -32,12 +38,7 @@ class IndividualProperty extends Component {
             justifyContent: 'space-evenly',
             flex: 1,
           }}>
-          {/* <TouchableOpacity
-            onPress={() => {
-              this.props.viewIndividualToggler();
-            }}>
-            <Text style={{color: 'black', fontSize: 36}}>X</Text>
-          </TouchableOpacity> */}
+        
 
           <View style={styles.header}>
             <Button
@@ -59,6 +60,14 @@ class IndividualProperty extends Component {
                 this.setState({
                   viewInformation: false,
                 });
+              }}
+            />
+            <Button
+              title="Back to List"
+              type="clear"
+              titleStyle={{color: 'black', fontSize: 14}}
+              onPress={() => {
+                this.props.viewIndividualToggler();
               }}
             />
           </View>
@@ -127,7 +136,6 @@ class IndividualProperty extends Component {
               <Text>Desired Price:{price}</Text>
               <Text>Bedrooms:{bedrooms}</Text>
               <Text>Bathrooms:{bathrooms}</Text>
-
             </View>
           </View>
         </View>
@@ -272,7 +280,6 @@ const styles = StyleSheet.create({
     width: '95%',
     marginLeft: '2.5%',
     display: 'flex',
-
   },
   headerTwo: {
     display: 'flex',
@@ -280,6 +287,5 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: 'rgba(0,0,0,.05)',
-
   },
 });
