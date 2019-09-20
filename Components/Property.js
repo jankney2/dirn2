@@ -32,6 +32,7 @@ class Property extends Component {
       <TouchableOpacity
         onPress={() => {
           this.props.updateDisplayProperty({
+            deleteId:this.props.deleteId, 
             address: this.props.address,
             ownerName: this.props.owner,
             distance: this.props.distance,

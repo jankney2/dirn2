@@ -139,6 +139,7 @@ class Properties extends Component {
     } else {
       return (
         <IndividualProperty
+        updateUserProperties={this.updateUserProperties}
           viewIndividualToggler={() => {
             this.viewIndividualToggler();
           }}

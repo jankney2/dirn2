@@ -3,21 +3,18 @@ import {View, Text, FlatList, Button} from 'react-native';
 import Property from './Property';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import IndividualProperty from './IndividualProperty'
-
+import IndividualProperty from './IndividualProperty';
 
 class CrmList extends Component {
   state = {
     userProperties: [],
   };
   componentDidMount() {
-  console.log(this.props.activeUser.user_id)
+    console.log(this.props.activeUser.user_id);
     axios
-      .get(
-        `https://dropin.business/api/userProperties/${this.props.activeUser.user_id}`
-      )
+      .get(`https://dropin.business/CRM/${this.props.activeUser.user_id}`)
       .then(res => {
-        console.log('CRM res', res.data)
+        console.log('CRM res', res.data);
         this.setState({
           userProperties: res.data,
         });
@@ -35,8 +32,15 @@ class CrmList extends Component {
     if (!this.state.viewIndividual) {
       return (
         <View>
-          <Text>CRM List</Text>
-          <Button title="send now!" color='red'/>
+          <View>
+            <Text>
+              The properties below are those that you have chosen to export to
+              your CRM. You'll get an email monday morning with them, or you can
+              push them now by pressing the "send now" button.
+            </Text>
+            <Button title="send now!" color="red" />
+          </View>
+
           <FlatList
             data={this.state.userProperties}
             renderItem={({item}) => {
@@ -51,7 +55,6 @@ class CrmList extends Component {
                         userProperties: newData,
                       });
                     }}
-
                     price={item.price}
                     bedrooms={item.bedrooms}
                     bathrooms={item.bathrooms}
@@ -73,13 +76,14 @@ class CrmList extends Component {
         </View>
       );
     } else {
-        return(
-
-            <IndividualProperty
- 
-            viewIndividualToggler={()=>{this.viewIndividualToggler()}}
-            />
-            )
+      return (
+        <IndividualProperty
+          updateUserProperties={this.updateUserProperties}
+          viewIndividualToggler={() => {
+            this.viewIndividualToggler();
+          }}
+        />
+      );
     }
   }
 }

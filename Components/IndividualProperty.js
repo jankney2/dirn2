@@ -17,12 +17,26 @@ class IndividualProperty extends Component {
     newNoteInput: '',
   };
 
+  propertyDeleter=()=>{
+Axios.delete(`https://dropin.business/properties/deleteProperty/${this.props.property.deleteId}`).then((res)=>{
+  this.props.updateUserProperties(res.data)
+}).catch(err=>{
+  console.log(err, 'error with delete property.')
+})
+  }
+
+  componentDidMount() {
+    console.log(this.props.property.deleteId, 'deleteId')
+  }
+  
+
   render() {
     let {
       address,
       latitude,
       longitude,
       ownerName,
+      deleteId,
       is_tracked,
       send_to_crm,
       bedrooms,
@@ -78,6 +92,7 @@ class IndividualProperty extends Component {
                 buttonStyle={[styles.buttonStyle, {
                   backgroundColor:'red'
                 }]}
+                onPress={this.propertyDeleter}
                 titleStyle={{color: 'black', fontSize: 12, fontWeight: '500'}}
                 type="outline"
                 title="Delete Property"
