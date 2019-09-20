@@ -17,6 +17,10 @@ class IndividualProperty extends Component {
     newNoteInput: '',
   };
 
+componentDidMount() {
+  console.log(this.props.property, 'property2')
+}
+
   propertyDeleter=()=>{
 Axios.delete(`https://dropin.business/properties/deleteProperty/${this.props.property.deleteId}`).then((res)=>{
   this.props.updateUserProperties(res.data)
@@ -25,11 +29,19 @@ Axios.delete(`https://dropin.business/properties/deleteProperty/${this.props.pro
 })
   }
 
-  componentDidMount() {
-    console.log(this.props.property.deleteId, 'deleteId')
+  sendToCRM=()=>{
+    Axios.post(`https://dropin.business/properties/addToCrmList/${this.props.property.deleteId}`, {
+      currentStatus:this.props.property.send_to_crm, 
+      userId:this.props.user.user_id
+    }).then(res=>{
+      this.props.updateUserProperties(res.data)
+    }).catch(err=>{
+      console.log(err, 'err with toggling crm status')
+    })
   }
   
 
+  
   render() {
     let {
       address,
@@ -99,6 +111,7 @@ Axios.delete(`https://dropin.business/properties/deleteProperty/${this.props.pro
               />
               <Button
                 title="Send to CRM"
+                onPress={()=>this.sendToCRM()}
                 titleStyle={{color: 'black', fontSize: 12, fontWeight: '500'}}
                 buttonStyle={[styles.buttonStyle, {
                   backgroundColor:'red'
@@ -238,7 +251,9 @@ Axios.delete(`https://dropin.business/properties/deleteProperty/${this.props.pro
 }
 
 const mapStateToProps = state => {
-  return {property: state.displayProperty};
+  return {property: state.displayProperty,
+    user:state.user
+  };
 };
 
 export default connect(
