@@ -136,6 +136,7 @@ class HomePage extends Component {
       return (
 
           <IndividualProperty
+          updateUserProperties={this.updateUserProperties}
             viewIndividualToggler={() => {
               this.viewIndividualToggler();
             }}
