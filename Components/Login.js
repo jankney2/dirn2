@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {setUser} from '../redux/actionsTypes';
 import Geolocation from '@react-native-community/geolocation'
+import Icon from 'react-native-vector-icons/EvilIcons'
 import {
   View,
   Text,
@@ -87,7 +88,7 @@ class Login extends Component {
                   });
                 }}
               />
-
+  <Icon name='pointer' size={30} color='black'/>
               <Button
                 title="login"
                 buttonStyle={styles.buttonStyle}
