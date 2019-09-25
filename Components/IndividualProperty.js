@@ -77,7 +77,7 @@ Axios.delete(`https://dropin.business/properties/deleteProperty/${this.props.pro
               }}
             />
 
-            <Button
+            {/* <Button
               title="Notes"
               type="clear"
               titleStyle={{color: 'black', fontSize: 14}}
@@ -86,7 +86,7 @@ Axios.delete(`https://dropin.business/properties/deleteProperty/${this.props.pro
                   viewInformation: false,
                 });
               }}
-            />
+            /> */}
             <Button
               title="Back to List"
               type="clear"
