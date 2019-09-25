@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-
+import {Button} from 'react-native-elements'
 import {
   View,
-  Button,
   Text,
   StyleSheet,
   TextInput,
@@ -12,6 +11,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import axios from 'axios';
+
 
 export default class Adder extends Component {
   state = {
@@ -121,13 +121,26 @@ export default class Adder extends Component {
 
           <TouchableOpacity>
             <Button
+              buttonStyle={{backgroundColor:'red'}}
               title="add property!"
               onPress={() => {
 //UNTESTED
 
 
                 Keyboard.dismiss()
-                axios.post('https://dropin.business/api/addListIndividual');
+                axios.post('https://dropin.business/api/addListIndividual', {
+                seller:this.state.seller, 
+                bathrooms:this.state.bathrooms, 
+                newListName:' ',
+                street:this.state.street, 
+                city: this.state.city, 
+                zip:this.state.zip, 
+                bedrooms:this.state.bedrooms, 
+                price:this.state.price,
+                track:true
+                }).then(res=>{
+                  this.props.navigation.navigate('properties')
+                });
               }}
             />
           </TouchableOpacity>

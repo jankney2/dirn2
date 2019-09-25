@@ -17,13 +17,12 @@ class IndividualProperty extends Component {
     newNoteInput: '',
   };
 
-componentDidMount() {
-  console.log(this.props.property, 'property2')
-}
-
   propertyDeleter=()=>{
 Axios.delete(`https://dropin.business/properties/deleteProperty/${this.props.property.deleteId}`).then((res)=>{
   this.props.updateUserProperties(res.data)
+  this.setState({
+    viewInformation:!this.state.viewInformation
+  })
 }).catch(err=>{
   console.log(err, 'error with delete property.')
 })
@@ -99,26 +98,7 @@ Axios.delete(`https://dropin.business/properties/deleteProperty/${this.props.pro
           </View>
           <View style={{flex: 3, width: '95%', marginLeft: '2.5%'}}>
             <Text style={styles.h1}>{ownerName}</Text>
-            <View style={styles.trackingHolder}>
-              <Button
-                buttonStyle={[styles.buttonStyle, {
-                  backgroundColor:'red'
-                }]}
-                onPress={this.propertyDeleter}
-                titleStyle={{color: 'black', fontSize: 12, fontWeight: '500'}}
-                type="outline"
-                title="Delete Property"
-              />
-              <Button
-                title="Send to CRM"
-                onPress={()=>this.sendToCRM()}
-                titleStyle={{color: 'black', fontSize: 12, fontWeight: '500'}}
-                buttonStyle={[styles.buttonStyle, {
-                  backgroundColor:'red'
-                }]}
-                type="outline"
-              />
-            </View>
+           
 
             <View style={styles.addressBox}>
               <Text style={styles.lighten}>Address</Text>
@@ -170,6 +150,24 @@ Axios.delete(`https://dropin.business/properties/deleteProperty/${this.props.pro
               <Text>Bathrooms:{bathrooms}</Text>
             </View>
           </View>
+          <View style={styles.trackingHolder}>
+              <Button
+                buttonStyle={[styles.buttonStyle]}
+                onPress={this.propertyDeleter}
+                titleStyle={{color: 'black', fontSize: 12, fontWeight: '500'}}
+                type="outline"
+                title="Delete Property"
+              />
+              {/* <Button
+                title="Send to CRM"
+                onPress={()=>this.sendToCRM()}
+                titleStyle={{color: 'black', fontSize: 12, fontWeight: '500'}}
+                buttonStyle={[styles.buttonStyle, {
+                  backgroundColor:'red'
+                }]}
+                type="outline"
+              /> */}
+            </View>
         </View>
       );
     } else {
@@ -280,10 +278,11 @@ const styles = StyleSheet.create({
     // borderColor: 'yellow',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   addressBox: {
+    justifyContent:'center',
     // borderColor: 'red',
     // borderWidth: 2,
     flex: 1,
@@ -297,9 +296,11 @@ const styles = StyleSheet.create({
   },
   houseDetails: {
     flex: 2,
+    justifyContent:'space-evenly', 
+    
   },
   mapsView: {
-    flex: 2,
+    flex: 3,
     // borderColor: 'green',
     // borderWidth: 1,
   },
@@ -310,6 +311,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     paddingLeft: 40,
     paddingRight: 40,
+
   },
   notesView: {
     width: '95%',
