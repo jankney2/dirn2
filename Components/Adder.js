@@ -138,8 +138,7 @@ export default class Adder extends Component {
 
                   Keyboard.dismiss();
                   axios
-                    .post('https://dropin.business/api/addListMobile', { 
-                      userId:14,
+                    .post('https://dropin.business/api/mobileAdd/14', { 
                       properties:[
                         {
                           seller: this.state.seller,
@@ -156,8 +155,22 @@ export default class Adder extends Component {
                       ]
                     })
                     .then(res => {
-                      console.log(res)
+                      this.setState({
+                        seller: '',
+                        bathrooms: '',
+                        street: '',
+                        city: '',
+                        zip: '',
+                        state: '',
+                        bedrooms: '',
+                        price: '',
+                        phone: '',
+                        email: '',
+                      })
+                      console.log(res.data, 'dammmmmit')
                       // this.props.navigation.navigate('properties');
+                    }).catch(err=>{
+                      console.log(err)
                     });
                 }}
               />
