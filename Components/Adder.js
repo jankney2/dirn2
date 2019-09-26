@@ -53,14 +53,15 @@ export default class Adder extends Component {
             }}
           />
           <TextInput
-            placeholder='list name'
+          placeholder='seller email'
             style={styles.input}
             onChangeText={text => {
               this.setState({
-                newListName: text,
+                email: text,
               });
             }}
           />
+        
           <TextInput
             placeholder='street'
             style={styles.input}
@@ -109,6 +110,16 @@ export default class Adder extends Component {
             }}
           />
           <TextInput
+            placeholder='bathrooms'
+            style={styles.input}
+            keyboardType='number-pad'
+            onChangeText={text => {
+              this.setState({
+                bathrooms: text,
+              });
+            }}
+          />
+          <TextInput
             placeholder='Price'
             keyboardType='number-pad'
             style={styles.input}
@@ -131,13 +142,14 @@ export default class Adder extends Component {
                 axios.post('https://dropin.business/api/addListIndividual', {
                 seller:this.state.seller, 
                 bathrooms:this.state.bathrooms, 
-                newListName:' ',
                 street:this.state.street, 
                 city: this.state.city, 
                 zip:this.state.zip, 
+                state:this.state.state,
                 bedrooms:this.state.bedrooms, 
                 price:this.state.price,
-                track:true
+                phone:this.state.sellerPhone, 
+                email:this.state.email
                 }).then(res=>{
                   this.props.navigation.navigate('properties')
                 });
@@ -145,6 +157,8 @@ export default class Adder extends Component {
             />
           </TouchableOpacity>
         </ScrollView>
+
+
         </KeyboardAvoidingView>
       </SafeAreaView>
     );
