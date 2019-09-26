@@ -158,15 +158,13 @@ Axios.delete(`https://dropin.business/properties/deleteProperty/${this.props.pro
                 type="outline"
                 title="Delete Property"
               />
-              {/* <Button
+              <Button
                 title="Send to CRM"
                 onPress={()=>this.sendToCRM()}
                 titleStyle={{color: 'black', fontSize: 12, fontWeight: '500'}}
-                buttonStyle={[styles.buttonStyle, {
-                  backgroundColor:'red'
-                }]}
+                buttonStyle={[styles.buttonStyle]}
                 type="outline"
-              /> */}
+              />
             </View>
         </View>
       );

@@ -22,6 +22,9 @@ class CrmList extends Component {
       })
       .catch(err => console.log(err));
   }
+
+
+  
   viewIndividualToggler = () => {
     this.setState({
       viewIndividual: !this.state.viewIndividual,

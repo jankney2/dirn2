@@ -1,17 +1,21 @@
 import React from 'react'
 
 import {createBottomTabNavigator, createAppContainer} from 'react-navigation'
+
 import Settings from './Settings'
 import HomePage from './HomePage'
 import 
 AllProperties from './AllProperties'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import CrmList from './CrmList'
 import Adder from './Adder'
 const settingsIcon=<Icon name='settings' size={30} color={'black'} />
 const nearby=<Icon name='my-location' size={30} color={'black'} />
 const listIcon=<Icon name='format-list-bulleted' size={30} color={'black'} />
 const addIcon=<Icon name='add-circle-outline' size={30} color={'black'} />
+
+const crmIcon= <MaterialIcon name='export' size={30} color={'black'}/>
 
 const small = createBottomTabNavigator(
     {
@@ -36,12 +40,13 @@ const small = createBottomTabNavigator(
           tabBarIcon:listIcon
         },
       },
-      // CRM: {
-      //   screen: CrmList,
-      //   navigationOptions: {
-      //     tabBarLabel: 'Export List',
-      //   },
-      // },
+      CRM: {
+        screen: CrmList,
+        navigationOptions: {
+          tabBarLabel: 'Export List',
+          tabBarIcon:crmIcon
+        },
+      },
       adder: {
         screen:Adder, 
         navigationOptions:{

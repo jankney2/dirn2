@@ -29,6 +29,25 @@ class Login extends Component {
     password: '',
   };
 
+  componentDidMount() {
+    axios
+    .post('https://dropin.business/auth/login', {
+      pass: 'j',
+      phone: 7572025877,
+    })
+    .then(res => {
+      this.props.setUser(res.data.user);
+      
+      this.setState({
+        phoneVal: '',
+        passVal: '',
+      });
+      Keyboard.dismiss();
+      this.props.navigation.navigate('homepage');
+    })
+  }
+  
+
   changeHandler = text => {
     this.setState({
       [text.name]: text,
