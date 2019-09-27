@@ -34,6 +34,7 @@ Axios.delete(`https://dropin.business/properties/deleteProperty/${this.props.pro
       userId:this.props.user.user_id
     }).then(res=>{
       this.props.updateUserProperties(res.data)
+      this.props.viewIndividualToggler()
     }).catch(err=>{
       console.log(err, 'err with toggling crm status')
     })

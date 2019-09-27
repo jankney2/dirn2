@@ -101,6 +101,7 @@ class Properties extends Component {
               <FlatList
                 data={this.state.userProperties}
                 renderItem={({item}) => {
+                  if(!item.send_to_crm){
                   return (
                     <Property
                       viewIndividualToggler={() => {
@@ -129,6 +130,7 @@ class Properties extends Component {
                       style={{textAlign: 'center'}}
                     />
                   );
+                    }
                 }}
                 keyExtractor={item => item.property_id.toString()}
               />

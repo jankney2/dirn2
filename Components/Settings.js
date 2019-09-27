@@ -20,15 +20,7 @@ class Settings extends Component {
           <Text>{this.props.activeUser.first_name} {this.props.activeUser.last_name}</Text>
           <Text>Email: {this.props.activeUser.user_email}</Text>
           <Text>Phone: {this.props.activeUser.user_phone}</Text>
-<View style={{
-    display:'flex', 
-    flexDirection:'row', 
 
-    alignItems:'center'
-}}>
-
-
-</View>
         </View>
 
         <View style={styles.section}>

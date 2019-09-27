@@ -47,13 +47,13 @@ const small = createBottomTabNavigator(
           tabBarIcon:crmIcon
         },
       },
-      adder: {
-        screen:Adder, 
-        navigationOptions:{
-          tabBarLabel:'Add',
-          tabBarIcon:addIcon
-        }
-      }
+      // adder: {
+      //   screen:Adder, 
+      //   navigationOptions:{
+      //     tabBarLabel:'Add',
+      //     tabBarIcon:addIcon
+      //   }
+      // }
     },
     {
       initialRouteName: 'homePage',
