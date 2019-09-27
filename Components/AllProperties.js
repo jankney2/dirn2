@@ -100,6 +100,9 @@ class Properties extends Component {
           {/* <View style={styles.headerNav}> */}
             <SearchBar
               value={this.state.searchVal}
+              lightTheme
+              platform='ios'
+              showCanel={true}
               // placeholder="Search for Owner/Address/City"
               // style={styles.inputStyles}
               onChangeText={(text)=>{
