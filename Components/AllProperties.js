@@ -17,11 +17,11 @@ import Geolocation from '@react-native-community/geolocation';
 import {SafeAreaView} from 'react-navigation';
 import IndividualProperty from './IndividualProperty';
 import {SearchBar} from 'react-native-elements';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 //icons
 
-// const searchBarIcon=<Icon name='search' size={14} color='black'/>
-
+const searchBarIcon = <Icon name="search" size={14} color="black" />;
 
 class Properties extends Component {
   constructor() {
@@ -76,7 +76,8 @@ class Properties extends Component {
     const newData = this.arrayHolder.filter(el => {
       return (
         el.street.toLowerCase().indexOf(text.toLowerCase()) > -1 ||
-        el.city.toLowerCase().indexOf(text.toLowerCase()) > -1 || el.seller.toLowerCase().indexOf(text.toLowerCase())>-1
+        el.city.toLowerCase().indexOf(text.toLowerCase()) > -1 ||
+        el.seller.toLowerCase().indexOf(text.toLowerCase()) > -1
       );
     });
 
@@ -85,52 +86,63 @@ class Properties extends Component {
     });
   };
 
+  changer=(text)=>{
+    this.setState({
+      searchVal:text
+    })
+  }
+
+
   render() {
     if (!this.state.viewIndividual) {
       return (
         <SafeAreaView>
-          <View style={styles.headerNav}>
-            <TextInput
-              placeholder="Search for Owner/Address/City"
-              style={styles.inputStyles}
-              onChangeText={this.inputChange}
+          {/* <View style={styles.headerNav}> */}
+            <SearchBar
+              value={this.state.searchVal}
+              // placeholder="Search for Owner/Address/City"
+              // style={styles.inputStyles}
+              onChangeText={(text)=>{
+                this.changer(text)
+                this.inputChange(text)
+              }}
             />
-          </View>
+          {/* </View> */}
           <ScrollView>
             <View>
               <FlatList
                 data={this.state.userProperties}
                 renderItem={({item}) => {
-                  if(!item.send_to_crm){
-                  return (
-                    <Property
-                      viewIndividualToggler={() => {
-                        this.viewIndividualToggler();
-                      }}
-                      updatePropertyList={newData => {
-                        this.setState({
-                          userProperties: newData,
-                        });
-                      }}
-                      distance={item.distance}
-                      notes={item.user_notes}
-                      price={item.price}
-                      bedrooms={item.bedrooms}
-                      bathrooms={item.bathrooms}
-                      owner={item.seller}
-                      searchVal={this.state.inputVal}
-                      owningUser={this.props.activeUser.user_id}
-                      updateUserProperties={this.updateUserProperties}
-                      latitude={item.latitude}
-                      longitude={item.longitude}
-                      address={`${item.street}, ${item.city}`}
-                      tracking={item.is_tracked}
-                      crmStatus={item.send_to_crm}
-                      deleteId={item.property_id}
-                      style={{textAlign: 'center'}}
-                    />
-                  );
-                    }
+                  if (!item.send_to_crm) {
+                    return (
+                      <Property
+                        viewIndividualToggler={() => {
+                          this.viewIndividualToggler();
+                        }}
+                        updatePropertyList={newData => {
+                          this.setState({
+                            userProperties: newData,
+                          });
+                        }}
+                        distance={item.distance}
+                        notes={item.user_notes}
+                        price={item.price}
+                        bedrooms={item.bedrooms}
+                        bathrooms={item.bathrooms}
+                        owner={item.seller}
+                        searchVal={this.state.inputVal}
+                        owningUser={this.props.activeUser.user_id}
+                        updateUserProperties={this.updateUserProperties}
+                        latitude={item.latitude}
+                        longitude={item.longitude}
+                        address={`${item.street}, ${item.city}`}
+                        tracking={item.is_tracked}
+                        crmStatus={item.send_to_crm}
+                        deleteId={item.property_id}
+                        style={{textAlign: 'center'}}
+                      />
+                    );
+                  }
                 }}
                 keyExtractor={item => item.property_id.toString()}
               />
@@ -141,7 +153,7 @@ class Properties extends Component {
     } else {
       return (
         <IndividualProperty
-        updateUserProperties={this.updateUserProperties}
+          updateUserProperties={this.updateUserProperties}
           viewIndividualToggler={() => {
             this.viewIndividualToggler();
           }}
@@ -160,13 +172,11 @@ const styles = StyleSheet.create({
   inputStyles: {},
   headerNav: {
     display: 'flex',
-    height:Math.round(Dimensions.get('window').height)*.1,
+    height: Math.round(Dimensions.get('window').height) * 0.1,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: 'rgba(0,0,0,.05)',
-
-
   },
 });
 
