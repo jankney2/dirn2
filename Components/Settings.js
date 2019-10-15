@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 // import {Button} from 'react-native-elements'
-import {View, Text, StyleSheet, Button} from 'react-native';
+import {View, Text, StyleSheet, Button, Linking} from 'react-native';
 import {connect} from 'react-redux';
 import Axios from 'axios';
 
@@ -23,12 +23,18 @@ class Settings extends Component {
 
         </View>
 
-        <View style={styles.section}>
+        {/* <View style={styles.section}>
           <Text style={styles.heading}>Subscription</Text>
-        </View>
+        </View> */}
 
         <View style={styles.section}>
-          <Text style={styles.heading}>Settings</Text>
+          <Text style={styles.heading}>About</Text>
+          <Text>DropIn is an app
+
+            We are in an early version of dropin! if you run into an issue, please reach out to us! 
+          </Text>
+          <Button onPress={() => Linking.openURL('mailto:support@example.com?subject=SendMail&body=Description') }
+      title="support@example.com" />
         </View>
 
         <Button 

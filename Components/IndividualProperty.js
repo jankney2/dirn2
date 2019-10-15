@@ -48,6 +48,8 @@ Axios.delete(`https://dropin.business/properties/deleteProperty/${this.props.pro
       latitude,
       longitude,
       ownerName,
+      phone, 
+      email, 
       deleteId,
       is_tracked,
       send_to_crm,

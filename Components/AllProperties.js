@@ -102,7 +102,8 @@ class Properties extends Component {
               value={this.state.searchVal}
               lightTheme
               platform='ios'
-              showCanel={true}
+              showCancel={false}
+              
               // placeholder="Search for Owner/Address/City"
               // style={styles.inputStyles}
               onChangeText={(text)=>{

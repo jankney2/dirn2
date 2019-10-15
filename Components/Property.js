@@ -41,7 +41,8 @@ class Property extends Component {
             bathrooms:this.props.bathrooms, 
             notes:this.props.notes, 
             latitude: this.props.latitude, 
-            longitude: this.props.longitude
+            longitude: this.props.longitude,
+            phone:this.props.phone
           });
           this.props.viewIndividualToggler()
         }}>
