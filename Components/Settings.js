@@ -8,6 +8,12 @@ import Axios from 'axios';
 
 class Settings extends Component {
   state = {};
+
+  componentDidMount() {
+    console.log(Linking, 'linking')
+  }
+  
+
   render() {
 
     phoneSplitter=(str)=>{
@@ -33,8 +39,10 @@ class Settings extends Component {
 
             We are in an early version of dropin! if you run into an issue, please reach out to us! 
           </Text>
-          <Button onPress={() => Linking.openURL('mailto:support@example.com?subject=SendMail&body=Description') }
-      title="support@example.com" />
+          <Button onPress={() => Linking.openURL('mailto:jhankney@gmail.com').catch(err=>{
+            console.log(err, 'link error')
+          }) }
+      title="email us!" />
         </View>
 
         <Button 
