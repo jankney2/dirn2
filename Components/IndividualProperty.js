@@ -17,6 +17,12 @@ class IndividualProperty extends Component {
     newNoteInput: '',
   };
 
+  emailProperty=()=>{
+    Axios.post(`https://dropin.business/emailProperty/${this.props.property_property_id}`, {
+      userId:this.props.property.owning_user
+    })
+  }
+
   propertyDeleter=()=>{
 Axios.delete(`https://dropin.business/properties/deleteProperty/${this.props.property.deleteId}`).then((res)=>{
   this.props.updateUserProperties(res.data)
@@ -142,8 +148,8 @@ Axios.delete(`https://dropin.business/properties/deleteProperty/${this.props.pro
             <View style={styles.contactBox}>
               <Text style={styles.lighten}>Owner Contact Info</Text>
 
-              <Text>Phone:</Text>
-              <Text>Email:</Text>
+              <Text>Phone:{phone}</Text>
+              <Text>Email:{email}</Text>
             </View>
 
             <View style={styles.houseDetails}>
@@ -154,19 +160,19 @@ Axios.delete(`https://dropin.business/properties/deleteProperty/${this.props.pro
             </View>
           </View>
           <View style={styles.trackingHolder}>
+            <Button
+              title="Email Me This Property"
+              onPress={()=>this.emailProperty()}
+              titleStyle={{color: 'black', fontSize: 12, fontWeight: '500'}}
+              buttonStyle={[styles.buttonStyle]}
+              type="outline"
+            />
               <Button
                 buttonStyle={[styles.buttonStyle]}
                 onPress={this.propertyDeleter}
                 titleStyle={{color: 'black', fontSize: 12, fontWeight: '500'}}
                 type="outline"
                 title="Delete Property"
-              />
-              <Button
-                title="Send to CRM"
-                onPress={()=>this.sendToCRM()}
-                titleStyle={{color: 'black', fontSize: 12, fontWeight: '500'}}
-                buttonStyle={[styles.buttonStyle]}
-                type="outline"
               />
             </View>
         </View>
@@ -279,7 +285,7 @@ const styles = StyleSheet.create({
     // borderColor: 'yellow',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
   },
   addressBox: {

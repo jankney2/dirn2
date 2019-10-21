@@ -40,13 +40,13 @@ const small = createBottomTabNavigator(
           tabBarIcon:listIcon
         },
       },
-      CRM: {
-        screen: CrmList,
-        navigationOptions: {
-          tabBarLabel: 'Export List',
-          tabBarIcon:crmIcon
-        },
-      },
+      // CRM: {
+      //   screen: CrmList,
+      //   navigationOptions: {
+      //     tabBarLabel: 'Export List',
+      //     tabBarIcon:crmIcon
+      //   },
+      // },
       // adder: {
       //   screen:Adder, 
       //   navigationOptions:{
