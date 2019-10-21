@@ -20,6 +20,10 @@ class IndividualProperty extends Component {
   emailProperty=()=>{
     Axios.post(`https://dropin.business/emailProperty/${this.props.property_property_id}`, {
       userId:this.props.property.owning_user
+    }).then(res=>{
+      this.setState({
+        viewInformation:false
+      })
     })
   }
 
