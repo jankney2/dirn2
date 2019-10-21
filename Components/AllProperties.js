@@ -128,6 +128,8 @@ class Properties extends Component {
                             userProperties: newData,
                           });
                         }}
+                        phone={item.seller_phone}
+                        email={item.seller_email}
                         distance={item.distance}
                         notes={item.user_notes}
                         price={item.price}
@@ -157,6 +159,7 @@ class Properties extends Component {
     } else {
       return (
         <IndividualProperty
+        
           updateUserProperties={this.updateUserProperties}
           viewIndividualToggler={() => {
             this.viewIndividualToggler();

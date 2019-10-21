@@ -17,9 +17,14 @@ class IndividualProperty extends Component {
     newNoteInput: '',
   };
 
+  componentDidMount() {
+    console.log(this.props, 'individual props')
+  }
+  
+
   emailProperty=()=>{
-    Axios.post(`https://dropin.business/emailProperty/${this.props.property_property_id}`, {
-      userId:this.props.property.owning_user
+    Axios.post(`https://dropin.business/emailProperty/${this.props.deleteId}`, {
+      userId:this.props.property.owningUser
     }).then(res=>{
       this.setState({
         viewInformation:false
@@ -320,8 +325,8 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     borderColor: 'black',
-    paddingLeft: 40,
-    paddingRight: 40,
+    paddingLeft: 20,
+    paddingRight: 20,
 
   },
   notesView: {

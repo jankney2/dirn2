@@ -111,6 +111,8 @@ class HomePage extends Component {
                       distance={item.distance}
                       notes={item.user_notes}
                       price={item.price}
+                      phone={item.seller_phone}
+                      email={item.seller_email}
                       bedrooms={item.bedrooms}
                       bathrooms={item.bathrooms}
                       owner={item.seller}

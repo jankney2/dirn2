@@ -42,7 +42,8 @@ class Property extends Component {
             notes:this.props.notes, 
             latitude: this.props.latitude, 
             longitude: this.props.longitude,
-            phone:this.props.phone
+            phone:this.props.phone, 
+            email:this.props.email
           });
           this.props.viewIndividualToggler()
         }}>
