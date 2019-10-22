@@ -26,6 +26,8 @@ class IndividualProperty extends Component {
     Axios.post(`https://dropin.business/emailProperty/${this.props.property.deleteId}`, {
       userId:this.props.user.user_id
     }).then(res=>{
+      //should be new list without deleted property
+      this.props.updateUserProperties(res.data)
       this.props.viewIndividualToggler()
     }).catch(err=>{
       console.log(err, 'email error')

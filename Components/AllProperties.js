@@ -86,6 +86,11 @@ class Properties extends Component {
     });
   };
 
+  updateUserProperties=(arr)=>{
+    this.setState({
+      userProperties:arr
+    })
+  }
   changer=(text)=>{
     this.setState({
       searchVal:text

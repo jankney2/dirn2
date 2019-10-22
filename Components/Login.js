@@ -44,6 +44,8 @@ class Login extends Component {
       });
       Keyboard.dismiss();
       this.props.navigation.navigate('homepage');
+    }).catch(err=>{
+      console.log(err, 'login error')
     })
   }
   

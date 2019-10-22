@@ -27,7 +27,14 @@ class HomePage extends Component {
     user: {},
     refreshing: false,
     viewDetails: false,
+    userProperties:[]
   };
+
+  updateUserProperties=(arr)=>{
+    this.setState({
+      userProperties:arr
+    })
+  }
 
   propertyFinder = () => {
     Geolocation.getCurrentPosition(position => {
@@ -94,6 +101,7 @@ class HomePage extends Component {
 
           <ScrollView>
             <View>
+              {this.state.userProperties.length>0&&
               <FlatList
                 data={this.state.userProperties}
                 renderItem={({item}) => {
@@ -131,7 +139,7 @@ class HomePage extends Component {
                     }
                 }}
                 keyExtractor={item => item.property_id.toString()}
-              />
+              />}
             </View>
           </ScrollView>
         </SafeAreaView>
