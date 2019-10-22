@@ -23,21 +23,19 @@ class IndividualProperty extends Component {
   
 
   emailProperty=()=>{
-    Axios.post(`https://dropin.business/emailProperty/${this.props.deleteId}`, {
-      userId:this.props.property.owningUser
+    Axios.post(`https://dropin.business/emailProperty/${this.props.property.deleteId}`, {
+      userId:this.props.user.user_id
     }).then(res=>{
-      this.setState({
-        viewInformation:false
-      })
+      this.props.viewIndividualToggler()
+    }).catch(err=>{
+      console.log(err, 'email error')
     })
   }
 
   propertyDeleter=()=>{
 Axios.delete(`https://dropin.business/properties/deleteProperty/${this.props.property.deleteId}`).then((res)=>{
   this.props.updateUserProperties(res.data)
-  this.setState({
-    viewInformation:!this.state.viewInformation
-  })
+  this.props.viewIndividualToggler()
 }).catch(err=>{
   console.log(err, 'error with delete property.')
 })
@@ -162,8 +160,8 @@ Axios.delete(`https://dropin.business/properties/deleteProperty/${this.props.pro
             </View>
 
             <View style={styles.houseDetails}>
-              <Text style={styles.lighten}>HouseDetails</Text>
-              <Text>Desired Price:{price}</Text>
+              <Text style={styles.lighten}>House Details</Text>
+              <Text>{`Desired Price: $ ${price}`}</Text>
               <Text>Bedrooms:{bedrooms}</Text>
               <Text>Bathrooms:{bathrooms}</Text>
             </View>

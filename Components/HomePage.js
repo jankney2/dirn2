@@ -89,7 +89,7 @@ class HomePage extends Component {
 
         <SafeAreaView style={styles.hello}>
           <View >
-          <Text style={styles.headerText}>Near me</Text>
+          <Text style={styles.headerText}>Near Me</Text>
           </View>
 
           <ScrollView>
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     display: 'none',
   },
   headerText: {
-    textAlign:'left', 
+    textAlign:'center', 
     fontSize:24, 
     margin:10
     
